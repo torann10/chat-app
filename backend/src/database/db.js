@@ -6,7 +6,7 @@ const dbPath = join(process.cwd(), 'chat.db');
 const db = new DatabaseSync(dbPath);
 
 export function initDb() {
-  const schemaPath = join(process.cwd(), 'src/database/schema.sql');
+  const schemaPath = join(process.cwd(), './src/database/schema.sql');
   const schema = readFileSync(schemaPath, 'utf8');
   
   db.exec(schema);

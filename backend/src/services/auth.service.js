@@ -1,12 +1,11 @@
-import db from '../database/db.js';
+import jwt from 'jsonwebtoken';
 
-export const findUserByUsername = (username) => {
-  const stmt = db.prepare('SELECT * FROM users WHERE username = ?');
-  return stmt.get(username);
-};
+export const JWT_SECRET = process.env.JWT_SECRET;
 
-export const createUser = (username, passwordHash) => {
-  const stmt = db.prepare('INSERT INTO users (username, password_hash) VALUES (?, ?)');
-  const result = stmt.run(username, passwordHash);
-  return result.lastInsertRowid;
-};
+export function generateToken(user) {
+  return jwt.sign(
+    { id: user.id, email: user.email }, 
+    JWT_SECRET, 
+    { expiresIn: '1d' }
+  );
+}
