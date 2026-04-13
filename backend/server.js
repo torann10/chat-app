@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
 
-const FRONTEND_URL = "http://localhost:4200";
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -159,7 +159,6 @@ app.post('/auth/signup', async (req, res) => {
     const stmt = db.prepare(`INSERT INTO users (email, password_hash) VALUES (?, ?)`);
     const result = stmt.run(email, hashedPassword);
     
-    // Auto-login the user after signup by returning a token
     const token = generateToken({ id: result.lastInsertRowid, email });
     res.json({ token, message: 'User created successfully' });
   } catch (error) {
