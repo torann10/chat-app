@@ -1,0 +1,17 @@
+<div class="flex h-screen w-full bg-gray-50 overflow-hidden font-sans">
+  <main class="flex-1 flex flex-col h-full min-w-0 relative">
+    <app-chat-header 
+      [roomName]="activeRoom()?.name || 'Loading...'" 
+      [activeUsersCount]="12" 
+      (toggleMenu)="isMobileMenuOpen = true" />
+
+    <app-message-list 
+      [messages]="currentMessages()" 
+      [isLoadingTop]="isLoadingOlder()"
+      [isLoadingBottom]="isLoadingNewer()"
+      (fetchMessages)="loadMoreMessages($event)" />
+
+    <app-message-input 
+      (sendMessage)="onSendMessage($event)" />
+  </main>
+</div>

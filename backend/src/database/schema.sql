@@ -3,7 +3,7 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT UNIQUE NOT NULL,
-    username TEXT UNIQUE,
+    fullname TEXT UNIQUE,
     password_hash TEXT NOT NULL,
     is_online BOOLEAN NOT NULL DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS rooms (
     name TEXT NOT NULL,
     type TEXT NOT NULL CHECK(type IN ('public', 'private', 'password', 'dm')),
     password_hash TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    last_read_message_id INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (last_read_message_id) REFERENCES messages(id)
 );
 
 CREATE TABLE IF NOT EXISTS room_members (

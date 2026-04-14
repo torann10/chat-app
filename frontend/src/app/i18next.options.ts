@@ -13,7 +13,7 @@ export const i18nextOptions: i18n.InitOptions & { backend: HttpBackendOptions} =
     'error'
   ],
   backend: {
-    loadPath: 'locales/{{lng}}.{{ns}}.json',
+    loadPath: 'assets/{{lng}}.{{ns}}.json',
   },
   detection: {
     order: ['cookie', 'header'],

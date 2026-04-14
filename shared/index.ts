@@ -1,6 +1,6 @@
 export interface User {
     id: number;
-    username: string;
+    fullname: string;
     email: string;
     avatar_url: string;
     is_online: string;
@@ -11,7 +11,7 @@ export interface Message {
     room_id: number;
     sender_id: number;
     content: string;
-    created_at: string;
+    created_at: Date;
 }
 
 export type RoomType = 'public' | 'private' | 'pw_protected' | 'dm';

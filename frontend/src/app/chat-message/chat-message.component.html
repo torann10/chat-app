@@ -1,0 +1,20 @@
+<div class="flex flex-col" >
+<!--[class.items-end]="message().isMine" [class.items-start]="!message().isMine" -->
+  <div class="flex items-baseline gap-2 mb-1" >
+    <!-- [class.flex-row-reverse]="message().isMine" -->
+    <span class="text-sm font-semibold text-gray-700">{{ message().sender_id }}</span>
+    <span class="text-xs text-gray-400">{{ message().created_at }}</span>
+  </div>
+      
+  <div 
+    class="max-w-[75%] px-4 py-2 rounded-2xl shadow-sm">
+    <!--[class.bg-blue-600]="message().isMine"
+    [class.text-white]="message().isMine"
+    [class.bg-white]="!message().isMine"
+    [class.text-gray-800]="!message().isMine"
+    [class.rounded-tr-none]="message().isMine"
+    [class.rounded-tl-none]="!message().isMine" 
+    >-->
+    {{ message().content }}
+  </div>
+</div>

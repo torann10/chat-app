@@ -1,0 +1,25 @@
+<header class="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
+      <div class="flex items-center gap-3">
+        <p-button 
+          icon="pi pi-bars" 
+          [text]="true" 
+          [rounded]="true" 
+          class="md:hidden" 
+          (onClick)="toggleMenu.emit()" />
+        
+        <div>
+          <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+            # {{ roomName() }}
+          </h2>
+          <span class="text-sm text-gray-500 flex items-center gap-1">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+            {{ activeUsersCount() }} online
+          </span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <p-button icon="pi pi-users" [text]="true" [rounded]="true" severity="secondary" />
+        <p-button icon="pi pi-cog" [text]="true" [rounded]="true" severity="secondary" />
+      </div>
+    </header>

@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { I18NEXT_SERVICE } from 'angular-i18next';
+import { PrimeNG } from 'primeng/config';
 import { tap } from 'rxjs';
 
 @Component({
@@ -13,8 +14,11 @@ export class App implements OnInit {
   protected readonly title = signal('frontend');
   private i18NextService = inject(I18NEXT_SERVICE);
   private router = inject(Router);
+  private primeng = inject(PrimeNG);
 
   ngOnInit(): void {
+    this.primeng.ripple.set(true);
+
     this.i18NextService.events.languageChanged.subscribe(() => {
       const root = this.router.routerState.root;
       if (root != null && root.firstChild != null) {
