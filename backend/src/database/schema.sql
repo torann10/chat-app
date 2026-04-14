@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS rooms (
 );
 
 CREATE TABLE IF NOT EXISTS room_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     room_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     role TEXT NOT NULL CHECK(role IN ('admin', 'member')),
