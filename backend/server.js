@@ -21,6 +21,10 @@ app.use(cors());
 app.use(passport.initialize());
 
 const FRONTEND_URL = process.env.FRONTEND_URL;
+const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID; 
+const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -89,8 +93,8 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
 }));
 
 passport.use(new GoogleStrategy({
-    clientID: 'YOUR_GOOGLE_CLIENT_ID',
-    clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback'
   },
   (accessToken, refreshToken, profile, done) => {
@@ -120,8 +124,8 @@ passport.use(new GoogleStrategy({
 ));
 
 passport.use(new FacebookStrategy({
-    clientID: 'YOUR_FACEBOOK_APP_ID',
-    clientSecret: 'YOUR_FACEBOOK_APP_SECRET',
+    clientID: FACEBOOK_CLIENT_ID,
+    clientSecret: FACEBOOK_CLIENT_SECRET,
     callbackURL: '/auth/facebook/callback',
     profileFields: ['id', 'emails'] 
   },
