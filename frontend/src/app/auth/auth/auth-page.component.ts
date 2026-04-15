@@ -21,10 +21,9 @@ import { MessageModule } from 'primeng/message';
     DividerModule,
     MessageModule
   ],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
+  templateUrl: './auth-page.component.html',
 })
-export class AuthComponent implements OnInit {
+export class AuthPageComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);

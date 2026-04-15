@@ -7,10 +7,10 @@ import { tap } from 'rxjs';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
-export class App implements OnInit {
+export class AppComponent implements OnInit {
   protected readonly title = signal('frontend');
   private i18NextService = inject(I18NEXT_SERVICE);
   private router = inject(Router);

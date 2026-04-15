@@ -1,18 +1,35 @@
 import { Routes } from '@angular/router';
-import { AuthComponent } from './auth/auth/auth.component';
+import { AuthPageComponent } from './auth/auth/auth-page.component';
 import { authGuard } from './auth/auth.guard';
 import { AuthCallbackComponent } from './auth/auth-callback/auth-callback.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
+import { noAuthGuard } from './auth/no-auth-guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
-  { path: 'auth', component: AuthComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { 
+    path: 'auth', 
+    component: AuthPageComponent,
+    canActivate: [noAuthGuard],
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { 
+        path: 'login',
+        loadComponent: () => 
+          import('./auth/login-form/login-form.component').then((m) => m.LoginFormComponent),
+      },
+      { 
+        path: 'signup',
+        loadComponent: () => 
+          import('./auth/signup-form/signup-form.component').then((m) => m.SignupFormComponent),
+      },
+    ], 
+  },
   { path: 'auth-callback', component: AuthCallbackComponent },
   { 
-    path: 'chat-container',
+    path: 'dashboard',
     component: ChatContainerComponent,
     canActivate: [authGuard] 
   },
-  { path: '**', redirectTo: '/auth' }
+  { path: '**', redirectTo: '/dashboard' }
 ];
