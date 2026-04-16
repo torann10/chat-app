@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { I18NextPipe } from 'angular-i18next';
  
 @Component({
-  selector: 'app-auth',
+  selector: 'app-auth-page',
   imports: [
     RouterOutlet,
     I18NextPipe

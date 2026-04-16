@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthPageComponent } from './auth/auth/auth-page.component';
+import { AuthPageComponent } from './auth/auth-page/auth-page.component';
 import { authGuard } from './auth/auth.guard';
 import { AuthCallbackComponent } from './auth/auth-callback/auth-callback.component';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
