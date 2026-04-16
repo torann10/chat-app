@@ -1,1 +1,18 @@
-{}
+{
+  "control_specific": {
+    "email": {
+      "required": "Email is required.",
+      "email": "Enter a valid email address."
+    },
+    "password": {
+      "required": "Password is required.",
+      "minlength": "Password must be at least 6 characters."
+    },
+    "fullname": {
+      "required": "Fullname is required",
+      "minlength": "Must be at least 3 characters.",
+      "maxlength": "Cannot exceed 32 characters."
+    }  
+  }
+
+}

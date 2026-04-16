@@ -156,7 +156,6 @@ passport.use(new FacebookStrategy({
 ));
 
 app.post('/auth/signup', async (req, res) => {
-  console.log("INCOMING DATA FROM POSTMAN:", req.body);
   const { email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);

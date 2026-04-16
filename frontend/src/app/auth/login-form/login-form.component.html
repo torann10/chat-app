@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-5">
 
   <div class="space-y-1">
-    <h2 class="text-xl font-bold text-app-text">{{ 'welcome_back' | i18next }}</h2>
-    <p class="text-sm text-app-muted">{{ 'enter_credentials' | i18next}}</p>
+    <h2 class="text-xl font-bold">{{ 'welcome_back' | i18next }}</h2>
+    <p class="text-sm">{{ 'enter_credentials' | i18next}}</p>
   </div>
 
   @if (error(); as err) {
@@ -13,42 +13,43 @@
   }
 
   <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium text-app-muted" for="login-email">{{ 'email' | i18next }}</label>
-    <input pInputText id="login-email" type="email" formControlName="email"
+    <label class="text-sm font-medium" for="login-email">{{ 'email' | i18next }}</label>
+    <input i18nextValidationMessage pInputText id="login-email" type="email" formControlName="email"
            placeholder="you@example.com" class="w-full" autocomplete="email" />
-    @if (getEmail().invalid && getEmail().touched) {
-      <p class="text-xs text-red-400">
-        {{ getEmail().hasError('required') ? 'email_required' : 'email_valid' | i18next }}
-      </p>
-    }
   </div>
 
   <div class="flex flex-col gap-1.5">
     <div class="flex items-center justify-between">
-      <label class="text-sm font-medium text-app-muted" for="login-password">{{ 'password' | i18next }}</label>
-      <a routerLink="/auth/forgot" class="text-xs text-primary-400 hover:text-primary-300 hover:underline">
+      <label class="text-sm font-medium" for="login-password">{{ 'password' | i18next }}</label>
+      <a routerLink="/auth/forgot" class="text-xs hover:underline">
         {{ 'forgot_password' | i18next }}
       </a>
     </div>
-    <p-password inputId="login-password" formControlName="password"
-                [toggleMask]="true" [feedback]="false" placeholder="••••••••"
-                styleClass="w-full" inputStyleClass="w-full" autocomplete="current-password" />
-    @if (getPassword().invalid && getPassword().touched) {
-      <p class="text-xs text-red-400">
-        {{ getPassword().hasError('required') ? 'password_required' : 'password_characters' | i18next }}
-      </p>
-    }
+    <p-password 
+      i18nextValidationMessage 
+      inputId="login-password" 
+      formControlName="password"
+      [toggleMask]="true" 
+      [feedback]="false" 
+      placeholder="••••••••" 
+      inputStyleClass="w-full" 
+      autocomplete="current-password" 
+    />
   </div>
 
-  <p-button type="submit" label="{{ 'sign_in' | i18next }}" icon="pi pi-sign-in" iconPos="right"
-            [disabled]="isLoading()" [loading]="isLoading()" styleClass="w-full" />
+  <p-button 
+    type="submit" 
+    label="{{ 'sign_in' | i18next }}" 
+    icon="pi pi-sign-in" 
+    iconPos="right"
+    [disabled]="isLoading()" 
+    [loading]="isLoading()" 
+    styleClass="w-full"
+  />
 
-  <div class="relative">
-    <div class="absolute inset-0 flex items-center">
-      <div class="w-full border-t border-app-border"></div>
-    </div>
+  <div class="relative my-2">
     <div class="relative flex justify-center">
-      <span class="bg-app-card px-3 text-xs text-app-subtle">{{ 'or_continue_with' | i18next }}</span>
+      <span class="px-3 text-xs">{{ 'or_continue_with' | i18next }}</span>
     </div>
   </div>
 
@@ -56,9 +57,9 @@
 
 </form>
 
-<p class="mt-6 text-center text-sm text-app-subtle">
+<div class="mt-6 text-center text-sm">
   {{ 'no_account' | i18next }}
-  <a routerLink="/auth/signup" class="font-medium text-primary-400 hover:text-primary-300 hover:underline">
+  <a routerLink="/auth/signup" class="font-medium hover:underline">
     {{ 'sign_up' | i18next }}
   </a>
-</p>
+</div>

@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-5">
 
   <div class="space-y-1">
-    <h2 class="text-xl font-bold text-app-text">{{ 'create_account' | i18next }}</h2>
-    <p class="text-sm text-app-muted">{{ 'fill_details' | i18next }}</p>
+    <h2 class="text-xl font-bold">{{ 'create_an_account' | i18next }}</h2>
+    <p class="text-sm">{{ 'fill_details' | i18next }}</p>
   </div>
 
   @if (error(); as err) {
@@ -13,53 +13,61 @@
   }
 
   <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium text-app-muted" for="signup-email">{{ 'email' | i18next }}</label>
-    <input pInputText id="signup-email" type="email" formControlName="email"
-           placeholder="you@example.com" class="w-full" autocomplete="email" />
-    @if (getEmail().invalid && getEmail().touched) {
-      <p class="text-xs text-red-400">
-        {{ getEmail().hasError('required') ? 'email_required' : 'email_valid' | i18next }}
-      </p>
-    }
+    <label class="text-sm font-medium" for="signup-email">{{ 'email' | i18next }}</label>
+    <input 
+      pInputText
+      i18nextValidationMessage 
+      id="signup-email" 
+      type="email" 
+      formControlName="email"
+      placeholder="you@example.com" 
+      class="w-full" 
+      autocomplete="email" 
+    />
+  </div>
+
+  <div class="flex flex-col gap-1.5 w-full min-w-0">
+    <label class="text-sm font-medium" for="signup-fullname">{{ 'fullname' | i18next }}</label>
+    <input 
+      pInputText
+      i18nextValidationMessage
+      id="signup-fullname" 
+      type="text" 
+      formControlName="fullname"
+      placeholder="e.g. Jane Doe" 
+      class="w-full" 
+      autocomplete="fullname" 
+    />
   </div>
 
   <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium text-app-muted" for="signup-fullname">{{ 'fullname' | i18next }}</label>
-    <input pInputText id="signup-fullname" type="text" formControlName="fullname"
-           placeholder="e.g. Jane Doe" class="w-full" autocomplete="fullname" />
-    @if (getFullname().invalid && getFullname().touched) {
-      <p class="text-xs text-red-400">
-        @if (getFullname().hasError('required')) { 'fullname_required' | i18next }
-        @else if (getFullname().hasError('minlength')) { 'fullname_characters_min' | i18next }
-        @else if (getFullname().hasError('maxlength')) { 'fullname_characters_max' | i18next }
-      </p>
-    }
+    <label class="text-sm font-medium" for="signup-password">{{ 'password' | i18next }}</label>
+    <p-password 
+      inputId="signup-password" 
+      i18nextValidationMessage
+      formControlName="password"
+      [toggleMask]="true" 
+      [feedback]="false"
+      placeholder="At least 6 characters"
+      class="w-full"
+      inputStyleClass="w-full"
+      autocomplete="new-password" 
+    />
   </div>
 
-  <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium text-app-muted" for="signup-password">{{ 'password' | i18next }}</label>
-    <p-password inputId="signup-password" formControlName="password"
-                [toggleMask]="true" [feedback]="true"
-                promptLabel="Choose a password" weakLabel="Too simple"
-                mediumLabel="Could be stronger" strongLabel="Great password"
-                placeholder="At least 6 characters"
-                styleClass="w-full" inputStyleClass="w-full" autocomplete="new-password" />
-    @if (getPassword().invalid && getPassword().touched) {
-      <p class="text-xs text-red-400">
-        {{ getPassword().hasError('required') ? 'password_required' : 'password_characters' | i18next }}
-      </p>
-    }
-  </div>
+  <p-button 
+    type="submit" 
+    label="{{ 'create_account' | i18next }}" 
+    icon="pi pi-user-plus" 
+    iconPos="right"
+    [disabled]="isLoading()" 
+    [loading]="isLoading()" 
+    styleClass="w-full" 
+  />
 
-  <p-button type="submit" label="Create account" icon="pi pi-user-plus" iconPos="right"
-            [disabled]="isLoading()" [loading]="isLoading()" styleClass="w-full" />
-
-  <div class="relative">
-    <div class="absolute inset-0 flex items-center">
-      <div class="w-full border-t border-app-border"></div>
-    </div>
+  <div class="relative my-2">
     <div class="relative flex justify-center">
-      <span class="bg-app-card px-3 text-xs text-app-subtle">{{ 'or_continue_with' | i18next }}</span>
+      <span class="px-3 text-xs">{{ 'or_continue_with' | i18next }}</span>
     </div>
   </div>
 
@@ -67,9 +75,9 @@
 
 </form>
 
-<p class="mt-6 text-center text-sm text-app-subtle">
+<div class="mt-6 text-center text-sm">
   {{ 'have_account' | i18next }}
-  <a routerLink="/auth/login" class="font-medium text-primary-400 hover:text-primary-300 hover:underline">
+  <a routerLink="/auth/login" class="font-medium hover:underline">
     {{ 'sign_in' | i18next }}
   </a>
-</p>
+</div>

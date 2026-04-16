@@ -4,12 +4,23 @@ import { ButtonModule } from 'primeng/button';
 import { SocialAuthComponent } from "../social-auth/social-auth.component";
 import { I18NextPipe } from 'angular-i18next';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PasswordModule } from 'primeng/password';
+import { I18NextValidationMessageDirective } from 'angular-i18next/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-signup-form',
-  imports: [ReactiveFormsModule, ButtonModule, SocialAuthComponent, I18NextPipe, PasswordModule],
+  imports: [
+    ReactiveFormsModule, 
+    ButtonModule, 
+    SocialAuthComponent, 
+    I18NextPipe, 
+    PasswordModule, 
+    I18NextValidationMessageDirective,
+    InputTextModule,
+    RouterLink
+  ],
   templateUrl: './signup-form.component.html',
 })
 export class SignupFormComponent {
@@ -41,7 +52,7 @@ export class SignupFormComponent {
     this.authService.signup(this.form.getRawValue()).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => {
-        this.error.set(err.error?.error ?? 'sign_up_failed');
+        this.error.set(err.error?.error ?? 'error:sign_up_failed');
         this.isLoading.set(false);
       },
     });
