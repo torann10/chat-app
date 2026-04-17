@@ -17,5 +17,21 @@
   "fullname": "Fullname",
   "have_account": "Already have an account?",
   "continue_with_google": "Continue with Google",
-  "continue_with_facebook": "Continue with Facebook"
+  "continue_with_facebook": "Continue with Facebook",
+  "type_message": "Type your message...",
+  "send": "Send",
+  "toggle_sidebar": "Toggle sidebar",
+  "members": "Members",
+  "settings": "Settings",
+  "online": "online",
+  "loading": "Loading...",
+  "loading_messages": "Loading messages...",
+  "no_messages": "No messages yet. Say something!",
+  "you": "You",
+  "direct_messages": "Direct messages",
+  "rooms": "Rooms",
+  "messages": "Messages",
+  "log_out": "Log out",
+  "light_mode": "Light mode",
+  "dark_mode": "Dark mode"
 }

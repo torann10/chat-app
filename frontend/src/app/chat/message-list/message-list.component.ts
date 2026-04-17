@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output, viewChild } from '@angular/core';
-import { Message } from './../../../../shared/index';
+import { Message } from '../../../../../shared/index';
 import { ScrollerLazyLoadEvent, Scroller, ScrollerModule } from 'primeng/scroller';
-import { ChatMessageComponent } from '../chat-message/chat-message.component';
+import { MessageItem } from '../message-item/message-item.component';
+import { I18NextPipe } from 'angular-i18next';
 
 @Component({
   selector: 'app-message-list',
   imports: [
-    CommonModule, ScrollerModule, ChatMessageComponent
+    CommonModule, 
+    ScrollerModule, 
+    MessageItem,
+    I18NextPipe
   ],
   templateUrl: './message-list.component.html',
-  styleUrl: './message-list.component.scss',
 })
 export class MessageListComponent {
   messages = input.required<Message[]>();

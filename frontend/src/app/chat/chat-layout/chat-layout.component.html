@@ -1,0 +1,36 @@
+<div class="flex h-dvh overflow-hidden font-sans">
+
+  @if (sidebarOpen()) {
+    <div
+      class="fixed inset-0 z-20 bg-surface-950/60 md:hidden"
+      (click)="closeSidebar()"
+    ></div>
+  }
+
+  <aside
+    class="fixed inset-y-0 left-0 z-30 flex h-full w-72 flex-col border-r transition-transform duration-300 ease-in-out md:relative md:z-auto md:translate-x-0"
+  >
+    <app-chat-sidebar
+      [rooms]="channels()"
+      [directMessages]="directMessages()"
+      [activeRoomId]="activeRoom()?.id ?? null"
+      (selectedRoom)="selectRoom($event)"
+    />
+  </aside>
+
+  <div class="flex flex-1 flex-col min-w-0">
+    <app-chat-header
+      [room]="activeRoom()"
+      [activeUsersCount]="activeUsersCount()"
+      (toggleSidebar)="toggleSidebar()"
+    />
+    <app-message-list
+      class="flex-1 min-h-0 block"
+      [messages]="messages()"
+      [isLoadingTop]="isLoading()"
+      [isLoadingBottom]="isLoading()"
+    />
+    <app-message-input (sendMessage)="sendMessage($event)" />
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+<header class="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 px-4">
+
+  <p-button
+    class="flex h-8 w-8 rounded-md transition-colors md:hidden"
+    (click)="toggleSidebar.emit()"
+    title="{{ 'toggle_sidebar' | i18next }}"
+    icon="pi pi-bars"
+  />
+
+  <div class="flex flex-1 items-center gap-2 min-w-0">
+    @if (room(); as r) {
+      @if (r.type === 'channel') {
+        <span class="text-lg font-light">#</span>
+        <h2 class="truncate font-semibold">{{ r.name }}</h2>
+      } @else {
+        <p-avatar label="{{r.name.charAt(0).toUpperCase()}}" shape="circle" />
+        <h2 class="truncate font-semibold">{{ r.name }}</h2>
+      }
+    } @else {
+      <h2 class="text-app-subtle">Select a room</h2>
+    }
+
+    @if (activeUsersCount() > 0) {
+      <div class="hidden sm:flex items-center gap-1.5 ml-2 shrink-0">
+        <div class="h-2 w-2 rounded-full bg-green-500"></div>
+        <span class="text-xs text-app-muted">{{ activeUsersCount() }} online</span>
+      </div>
+    }
+  </div>
+
+  
+  <div class="flex shrink-0 items-center gap-2">
+    <p-button
+      icon="pi pi-users"
+      [text]="true"
+      [rounded]="true"
+      severity="secondary"
+      pTooltip="{{ 'members' | i18next }}"
+      tooltipPosition="bottom"
+      (onClick)="openMembers.emit()"
+    />
+    <p-button
+      icon="pi pi-cog"
+      [text]="true"
+      [rounded]="true"
+      severity="secondary"
+      size="small"
+      pTooltip="{{ 'settings' | i18next }}"
+      tooltipPosition="bottom"
+      (onClick)="openSettings.emit()"
+    />
+  </div>
+
+</header>

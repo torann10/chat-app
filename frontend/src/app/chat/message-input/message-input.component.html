@@ -1,0 +1,25 @@
+<div class="shrink-0 bg-white border-t border-gray-200 px-4 py-3">
+  <div class="flex items-center gap-2 rounded-xl px-3 py-2 ring-1 focus-within:ring-primary-500/50 transition-shadow">
+
+    <input
+      pInputText
+      class="flex-1 bg-transparent text-sm outline-none border-none shadow-none"
+      [style.box-shadow]="'none'"
+      [(ngModel)]="messageText"
+      placeholder="{{ 'type_message' | i18next }}"
+      (keydown.enter)="submit()"
+      autocomplete="off"
+    />
+
+    <p-button
+      icon="pi pi-send"
+      [rounded]="true"
+      [text]="true"
+      severity="secondary"
+      size="small"
+      [disabled]="!messageText().trim()"
+      (onClick)="submit()"
+      title="{{ 'send' | i18next }}"
+    />
+  </div>
+</div>

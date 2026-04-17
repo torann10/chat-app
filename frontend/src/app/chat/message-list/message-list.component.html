@@ -1,0 +1,48 @@
+<div class="flex flex-1 flex-col relative overflow-y-auto h-full w-full p-2 bg-gray-50">
+  @if (isLoadingTop()) {
+    <div class="flex flex-1 items-center justify-center">
+      <div class="flex items-center gap-2">
+        <i class="pi pi-spin pi-spinner"></i>
+        <span class="text-sm">{{ 'loading_messages' | i18next }}</span>
+      </div>
+    </div>
+  } @else if (messages().length === 0) {
+    <div class="flex flex-1 items-center justify-center">
+      <div class="text-center text-app-subtle">
+        <i class="pi pi-comments mb-3 block text-4xl opacity-40"></i>
+        <p class="text-sm">{{ 'no_messages' | i18next }}</p>
+      </div>
+    </div>
+  } @else {
+    <div class="flex-1 overflow-hidden">
+      <p-virtualscroller 
+        #scroller
+        [items]="messages()" 
+        [itemSize]="80" 
+        [lazy]="true" 
+        scrollHeight="100%"
+        (onLazyLoad)="onScrollLoad($event)"
+        styleClass="w-full h-full"
+        [delay]="0">
+        
+        <ng-template pTemplate="item" let-msg let-i="index" let-first="first">
+          <div class="pb-4">
+            <app-message-item 
+              [message]="msg"
+              [showSender]="first || messages()[i - 1]?.sender_id !== msg.sender_id" 
+            />
+          </div>
+        </ng-template>
+      </p-virtualscroller>
+    </div>
+  }
+
+  @if (isLoadingBottom()) {
+    <div class="flex flex-1 items-center justify-center">
+      <div class="flex items-center gap-2">
+        <i class="pi pi-spin pi-spinner"></i>
+        <span class="text-sm">{{ 'loading_messages' | i18next }}</span>
+      </div>
+    </div>
+  }
+</div>

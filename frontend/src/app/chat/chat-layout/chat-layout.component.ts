@@ -1,34 +1,39 @@
-import { Component, computed, signal, viewChild } from '@angular/core';
+import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { MessageInputComponent } from '../message-input/message-input.component';
 import { MessageListComponent } from '../message-list/message-list.component';
 import { ChatHeaderComponent } from '../chat-header/chat-header.component';
-import { Message, Room } from '../../../../shared';
+import { Message, Room } from '../../../../../shared';
+import { ChatSidebarComponent } from '../chat-sidebar/chat-sidebar.component';
+import { ChatService } from '../chat.service';
 
 @Component({
-  selector: 'app-chat-container',
-  imports: [MessageInputComponent, MessageListComponent, ChatHeaderComponent],
-  templateUrl: './chat-container.component.html',
-  styleUrl: './chat-container.component.scss',
+  selector: 'app-chat-layout',
+  imports: [
+    MessageInputComponent, 
+    MessageListComponent, 
+    ChatHeaderComponent,
+    ChatSidebarComponent
+  ],
+  templateUrl: './chat-layout.component.html',
 })
-export class ChatContainerComponent {
-  isMobileMenuOpen = false;
+export class ChatLayoutComponent {
+  protected readonly sidebarOpen = signal(false);
+
+  private chatService = inject(ChatService);
+
+  protected readonly channels = this.chatService.channels;
+  protected readonly directMessages = this.chatService.directMessages;
+  protected readonly activeRoom = this.chatService.activeRoom;
+  protected readonly messages = this.chatService.messages;
+  protected readonly isLoading = this.chatService.isLoadingMessages;
+  protected readonly activeUsersCount = this.chatService.activeUsersCount;
 
   rooms = signal<Room[]>([]);
-  messages = signal<Message[]>([]);
-  activeRoom = signal<Room | null>(this.rooms()[0]);
-
-  channels = computed(() => this.rooms().filter(r => r.type === 'channel'));
-  directMessages = computed(() => this.rooms().filter(r => r.type === 'dm'));
+  
+  
   currentMessages = computed(() => this.messages());
 
   messageListComponent = viewChild(MessageListComponent);
-
-  switchRoom(room: Room) {
-    this.activeRoom.set(room);
-    this.isMobileMenuOpen = false;
-
-    this.messageListComponent()?.scrollToBottom();
-  }
 
   onSendMessage(content: string) {
     const newMessage: Message = {
@@ -71,5 +76,22 @@ export class ChatContainerComponent {
         this.isLoadingNewer.set(false);
       }, 1500);
     }
+  }
+
+  protected toggleSidebar(): void {
+    this.sidebarOpen.update((v) => !v);
+  }
+
+  protected closeSidebar(): void {
+    this.sidebarOpen.set(false);
+  }
+
+  protected selectRoom(roomId: number): void {
+    this.chatService.selectRoom(roomId);
+    this.sidebarOpen.set(false);
+  }
+
+  protected sendMessage(content: string): void {
+    this.chatService.sendMessage(content);
   }
 }

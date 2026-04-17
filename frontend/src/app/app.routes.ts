@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthPageComponent } from './auth/auth-page/auth-page.component';
 import { authGuard } from './auth/auth.guard';
 import { AuthCallbackComponent } from './auth/auth-callback/auth-callback.component';
-import { ChatContainerComponent } from './chat-container/chat-container.component';
+import { ChatLayoutComponent } from './chat/chat-layout/chat-layout.component';
 import { noAuthGuard } from './auth/no-auth-guard';
 
 export const routes: Routes = [
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'auth-callback', component: AuthCallbackComponent },
   { 
     path: 'dashboard',
-    component: ChatContainerComponent,
+    component: ChatLayoutComponent,
     canActivate: [authGuard] 
   },
   { path: '**', redirectTo: '/dashboard' }
