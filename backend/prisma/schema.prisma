@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  fullname     String?  @unique
+  passwordHash String?  @map("password_hash")
+  isOnline     Boolean  @default(false) @map("is_online")
+  googleId     String?  @unique @map("google_id")
+  facebookId   String?  @unique @map("facebook_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  messages    Message[]
+  memberships RoomMember[]
+
+  @@map("users")
+}
+
+model Room {
+  id           Int      @id @default(autoincrement())
+  name         String
+  type         String   // public | private | password | dm
+  passwordHash String?  @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  messages Message[]
+  members  RoomMember[]
+
+  @@map("rooms")
+}
+
+model RoomMember {
+  id          Int      @id @default(autoincrement())
+  roomId      Int      @map("room_id")
+  userId      Int      @map("user_id")
+  role        String   // admin | member
+  unreadCount Int      @default(0) @map("unread_count")
+  joinedAt    DateTime @default(now()) @map("joined_at")
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("room_members")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  roomId    Int      @map("room_id")
+  senderId  Int      @map("sender_id")
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  room   Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  sender User @relation(fields: [senderId], references: [id])
+
+  @@map("messages")
+}
