@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output, viewChild } from '@angular/core';
-import { Message } from '../../../../../shared/index';
+import { Message } from '../../../../../shared';
 import { ScrollerLazyLoadEvent, Scroller, ScrollerModule } from 'primeng/scroller';
 import { MessageItem } from '../message-item/message-item.component';
 import { I18NextPipe } from 'angular-i18next';

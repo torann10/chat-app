@@ -1,0 +1,32 @@
+<div class="flex items-center gap-2.5">
+  <div class="relative shrink-0">
+    <p-avatar label="Y" shape="circle" />
+  </div>
+
+  <div class="min-w-0 flex-1">
+    <div class="truncate text-sm font-medium">{{ 'you' | i18next }}</div>
+    <div class="hidden sm:flex items-center gap-1.5 shrink-0">
+      <div class="h-2 w-2 rounded-full bg-green-500"></div>
+      <span class="text-xs">{{ 'online' | i18next }}</span>
+    </div>
+  </div>
+
+  <p-button
+    icon="pi pi-ellipsis-h"
+    [text]="true"
+    [rounded]="true"
+    severity="secondary"
+    size="small"
+    (click)="menu.toggle($event)"
+  />
+</div>
+
+<p-menu #menu [model]="menuItems()" [popup]="true">
+  <ng-template pTemplate="submenuheader" let-item>
+    @if (item.label) {
+      {{ item.label }}
+    } @else {
+      <p-divider class="my-0!" />
+    }
+  </ng-template>
+</p-menu>

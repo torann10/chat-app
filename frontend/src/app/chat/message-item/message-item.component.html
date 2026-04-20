@@ -1,11 +1,11 @@
 <div
   class="flex gap-2 px-1 py-0.5 group"
-  [class.flex-row-reverse]="message().sender_id == 1"
+  [class.flex-row-reverse]="message().senderId === currentUserId()"
 >
-  @if (message().sender_id != 1) {
+  @if (message().senderId !== currentUserId()) {
     <div class="mt-1 shrink-0">
       @if (showSender()) {
-        <p-avatar label="{{message().sender_id == 1 ? 'Y' : message().sender_id.toString() }}" shape="circle" />
+        <p-avatar [label]="message().sender.fullname?.charAt(0) ?? message().sender.email.charAt(0)" shape="circle" />
       } @else {
         <div class="w-8"></div>
       }
@@ -14,36 +14,37 @@
 
   <div
     class="flex max-w-[75%] flex-col gap-1"
-    [class.items-end]="message().sender_id == 1"
-    [class.items-start]="message().sender_id != 1"
+    [class.items-end]="message().senderId === currentUserId()"
+    [class.items-start]="message().senderId !== currentUserId()"
   >
     @if (showSender()) {
       <div class="flex items-baseline gap-2 px-1"
-          [class.flex-row-reverse]="message().sender_id == 1">
+          [class.flex-row-reverse]="message().senderId === currentUserId()">
         <span class="text-xs font-semibold">
-          {{ message().sender_id == 1 ? '' : message().sender_id.toString() | i18next }}
+          {{ message().senderId === currentUserId() ? '' : (message().sender.fullname ?? message().sender.email) }}
         </span>
         <span class="text-xs">
-          {{ message().created_at | date: 'HH:mm' }}
+          {{ message().createdAt | date: 'HH:mm' }}
         </span>
       </div>
     }
     
     <div
       class="rounded-2xl px-3.5 py-2 text-sm break-words"
-      [class.rounded-tr-sm]="message().sender_id == 1"
-      [class.rounded-tl-sm]="message().sender_id != 1"
-      [class.bg-gray-200]="message().sender_id == 1"
-      [class.bg-emerald-500]="message().sender_id != 1"
-      [class.text-white]="message().sender_id != 1"
+      [class.rounded-tr-sm]="message().senderId === currentUserId()"
+      [class.rounded-tl-sm]="message().senderId !== currentUserId()"
+      [class.bg-gray-200]="message().senderId === currentUserId()"
+      [class.bg-emerald-500]="message().senderId === currentUserId()"
+      [class.text-white]="message().senderId !== currentUserId()"
+      [class.opacity-60]="message().id < 0"
       >
       {{ message().content }}
     </div>
 
     @if (!showSender()) {
       <div class="px-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <span class="text-xs text-app-subtle">
-          {{ message().created_at | date: 'HH:mm' }}
+        <span class="text-xs">
+          {{ message().createdAt | date: 'HH:mm' }}
         </span>
       </div>
     }

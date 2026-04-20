@@ -29,7 +29,7 @@
           <div class="pb-4">
             <app-message-item 
               [message]="msg"
-              [showSender]="first || messages()[i - 1]?.sender_id !== msg.sender_id" 
+              [showSender]="first || messages()[i - 1]?.senderId !== msg.senderId" 
             />
           </div>
         </ng-template>

@@ -7,71 +7,48 @@
 
 <div class="flex-1 overflow-y-auto p-3 space-y-5">
   <p-menu [model]="menuItems()" styleClass="w-full border-none bg-transparent p-0">
+
+    <ng-template pTemplate="submenuheader" let-item>
+      <div class="flex items-center justify-between px-3 py-1">
+        <span class="text-xs font-semibold uppercase tracking-wider text-muted">
+          {{ item.label | i18next }}
+        </span>
+        @if (item.data?.['addAction']) {
+          <button
+            type="button"
+            class="flex h-5 w-5 items-center justify-center rounded transition-colors hover:bg-canvas-hover text-muted hover:text-default"
+            [title]="(item.data['addAction'] === 'room' ? 'create_room_tooltip' : 'new_dm_tooltip') | i18next"
+            (click)="onAddClick(item.data['addAction'], $event)">
+            <i class="pi pi-plus text-xs"></i>
+          </button>
+        }
+      </div>
+    </ng-template>
+
     <ng-template pTemplate="item" let-item>
-      <a class="cursor-pointer flex items-center justify-between px-3 py-2 rounded-lg transition-colors hover:bg-gray-100"
-          [class.bg-blue-50]="item.id === activeRoomId()"
-          [class.text-blue-700]="item.id === activeRoomId()"
-          [class.text-gray-700]="item.id !== activeRoomId()">
-        
+      <div class="cursor-pointer flex items-center justify-between px-3 py-2 rounded-lg transition-colors hover:bg-gray-100"
+          [class.bg-highlight-bg]="item.id == activeRoomId()"
+          [class.text-highlight]="item.id == activeRoomId()"
+          [class.text-muted]="item.icon && !item.data?.['isMember'] && item.id != activeRoomId()">
         <div class="flex items-center gap-2">
           @if (item.icon) {
             <i [class]="item.icon"></i>
           } @else {
-            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            <div class="w-2 h-2 rounded-full shrink-0"
+                 [class.bg-green-500]="item.state?.['isOnline']"
+                 [class.bg-surface-400]="!item.state?.['isOnline']"></div>
           }
-          <span class="font-medium">{{ item.label }}</span>
+          <span [class.font-medium]="item.data?.['isMember'] || !item.icon">{{ item.label }}</span>
         </div>
         
         @if (item.badge) {
           <p-badge [value]="item.badge" severity="danger"></p-badge>
         }
-      </a>
+      </div>
     </ng-template>
   </p-menu>
 </div>
 
-<div class="shrink-0 border-t px-3 py-2.5">
-  <div class="flex items-center gap-2.5">
-    <div class="relative shrink-0">
-      <p-avatar label="Y" shape="circle" />
-    </div>
-
-    <div class="min-w-0 flex-1">
-      <div class="truncate text-sm font-medium text-app-text">{{ 'you' | i18next }}</div>
-      <div class="hidden sm:flex items-center gap-1.5 shrink-0">
-        <div class="h-2 w-2 rounded-full bg-green-500"></div>
-        <span class="text-xs">{{ 'online' | i18next }}</span>
-      </div>
-    </div>
-
-    <p-button
-      #optionsBtn
-      class="rounded-md p-1.5 transition-colors "
-      title="Options"
-      (click)="op.toggle($event)"
-      icon="pi pi-ellipsis-h"
-    />
-  </div>
-
+<div class="shrink-0 border-t border-border px-3 py-2.5">
+  <app-sidebar-user-menu />
 </div>
-
-<p-popover #op>
-  <div class="flex flex-col gap-2 min-w-[160px]">
-
-    <p-button
-      class="flex items-center gap-2.5 rounded-md text-sm transition-colors w-full text-left"
-      (click)="theme.toggle(); op.hide()"
-      [icon]="theme.isDark() ? 'pi pi-sun' : 'pi pi-moon'"
-      label="{{ theme.isDark() ? 'light_mode' : 'dark_mode' | i18next }}"
-    />
-
-    <p-button
-      class="flex items-center gap-2.5 rounded-md text-sm w-full text-left"
-      (click)="logout(); op.hide()"
-      icon="pi pi-sign-out"
-      label="{{ 'log_out' | i18next }}"
-      severity="danger"
-    />
-
-  </div>
-</p-popover>

@@ -9,12 +9,15 @@
 
   <aside
     class="fixed inset-y-0 left-0 z-30 flex h-full w-72 flex-col border-r transition-transform duration-300 ease-in-out md:relative md:z-auto md:translate-x-0"
+    [class.-translate-x-full]="!sidebarOpen()"
   >
     <app-chat-sidebar
       [rooms]="channels()"
       [directMessages]="directMessages()"
       [activeRoomId]="activeRoom()?.id ?? null"
       (selectedRoom)="selectRoom($event)"
+      (addRoom)="openCreateRoom()"
+      (addDm)="openCreateDm()"
     />
   </aside>
 
@@ -23,14 +26,38 @@
       [room]="activeRoom()"
       [activeUsersCount]="activeUsersCount()"
       (toggleSidebar)="toggleSidebar()"
+      (openMembers)="showMembers.set(true)"
     />
     <app-message-list
       class="flex-1 min-h-0 block"
       [messages]="messages()"
       [isLoadingTop]="isLoading()"
-      [isLoadingBottom]="isLoading()"
+      [isLoadingBottom]="isLoadingOlderMessages()"
+      (fetchMessages)="loadMoreMessages($event)"
     />
     <app-message-input (sendMessage)="sendMessage($event)" />
   </div>
 
 </div>
+
+<app-create-room-dialog
+  [(visible)]="showCreateRoom"
+  (submitted)="onRoomCreated($event)"
+/>
+
+<app-create-dm-dialog
+  [(visible)]="showCreateDm"
+  [excludeIds]="[currentUserId()]"
+  (submitted)="onDmCreated($event)"
+/>
+
+<app-join-room-dialog
+  [room]="pendingJoinRoom()"
+  [(visible)]="showJoinRoom"
+  (joined)="onRoomJoined()"
+/>
+
+<app-room-members
+  [room]="activeRoom()"
+  [(visible)]="showMembers"
+/>

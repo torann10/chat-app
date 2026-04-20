@@ -1,0 +1,14 @@
+<p-dialog
+  [(visible)]="visible"
+  [header]="'new_direct_message' | i18next"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="w-[480px]"
+  (onHide)="close()">
+
+  <app-user-picker
+    [excludeIds]="excludeIds()"
+    (userSelected)="onUserSelected($event)" />
+
+</p-dialog>

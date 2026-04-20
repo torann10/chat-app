@@ -21,5 +21,4 @@ export class ChatHeaderComponent {
   
   toggleSidebar = output<void>();
   openMembers = output<void>();
-  openSettings = output<void>();
 }
