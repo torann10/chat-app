@@ -23,7 +23,7 @@
         <span class="text-xs font-semibold">
           {{ message().senderId === currentUserId() ? '' : (message().sender.fullname ?? message().sender.email) }}
         </span>
-        <span class="text-xs">
+        <span class="text-xs text-muted">
           {{ message().createdAt | date: 'HH:mm' }}
         </span>
       </div>
@@ -33,8 +33,8 @@
       class="rounded-2xl px-3.5 py-2 text-sm break-words"
       [class.rounded-tr-sm]="message().senderId === currentUserId()"
       [class.rounded-tl-sm]="message().senderId !== currentUserId()"
-      [class.bg-gray-200]="message().senderId === currentUserId()"
-      [class.bg-emerald-500]="message().senderId === currentUserId()"
+      [class.bg-canvas-hover]="message().senderId === currentUserId()"
+      [class.bg-primary-500]="message().senderId !== currentUserId()"
       [class.text-white]="message().senderId !== currentUserId()"
       [class.opacity-60]="message().id < 0"
       >
@@ -43,7 +43,7 @@
 
     @if (!showSender()) {
       <div class="px-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <span class="text-xs">
+        <span class="text-xs text-muted">
           {{ message().createdAt | date: 'HH:mm' }}
         </span>
       </div>

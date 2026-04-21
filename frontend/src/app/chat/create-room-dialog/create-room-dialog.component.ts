@@ -6,6 +6,8 @@ import { PasswordModule } from 'primeng/password';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { I18NextValidationMessageDirective } from 'angular-i18next/forms';
 
 @Component({
   selector: 'app-create-room-dialog',
@@ -15,7 +17,9 @@ import { ButtonModule } from 'primeng/button';
     SelectButtonModule,
     DialogModule,
     ButtonModule,
-    I18NextPipe
+    I18NextPipe,
+    InputTextModule,
+    I18NextValidationMessageDirective
   ],
   templateUrl: './create-room-dialog.component.html',
 })

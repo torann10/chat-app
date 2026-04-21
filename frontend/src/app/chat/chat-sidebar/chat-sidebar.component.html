@@ -1,12 +1,12 @@
-<div class="flex h-14 shrink-0 items-center gap-2.5 border-b px-4">
+<div class="flex h-14 shrink-0 items-center gap-2.5 border-b border-border px-4">
   <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-primary-600">
     <i class="pi pi-comments text-sm"></i>
   </div>
   <span class="font-semibold">{{ 'title' | i18next }}</span>
 </div>
 
-<div class="flex-1 overflow-y-auto p-3 space-y-5">
-  <p-menu [model]="menuItems()" styleClass="w-full border-none bg-transparent p-0">
+<div class="flex-1 overflow-y-auto space-y-5">
+  <p-menu [model]="menuItems()" styleClass="w-full !border-none !bg-transparent p-0">
 
     <ng-template pTemplate="submenuheader" let-item>
       <div class="flex items-center justify-between px-3 py-1">
@@ -26,13 +26,13 @@
     </ng-template>
 
     <ng-template pTemplate="item" let-item>
-      <div class="cursor-pointer flex items-center justify-between px-3 py-2 rounded-lg transition-colors hover:bg-gray-100"
+      <div class="cursor-pointer flex items-center justify-between px-3 py-2 rounded-lg transition-colors hover:bg-canvas-hover"
           [class.bg-highlight-bg]="item.id == activeRoomId()"
           [class.text-highlight]="item.id == activeRoomId()"
           [class.text-muted]="item.icon && !item.data?.['isMember'] && item.id != activeRoomId()">
         <div class="flex items-center gap-2">
           @if (item.icon) {
-            <i [class]="item.icon"></i>
+            <i [class]="item.icon" class="text-sm w-4 text-center"></i>
           } @else {
             <div class="w-2 h-2 rounded-full shrink-0"
                  [class.bg-green-500]="item.state?.['isOnline']"

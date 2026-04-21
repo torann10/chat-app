@@ -12,7 +12,10 @@
       "required": "Fullname is required",
       "minlength": "Must be at least 3 characters.",
       "maxlength": "Cannot exceed 32 characters."
-    }  
+    },
+    "name": {
+      "required": "Room name is required.",
+      "maxlength": "Cannot exceed 100 characters."
+    }
   }
-
 }

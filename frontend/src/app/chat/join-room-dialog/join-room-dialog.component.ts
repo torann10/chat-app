@@ -62,7 +62,7 @@ export class JoinRoomDialogComponent {
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.error.set(err.error?.error ?? 'Failed to join the room. Please try again.');
+        this.error.set(err.error?.error ?? 'error:join_failed');
       },
     });
   }

@@ -23,6 +23,7 @@
       <label class="text-sm font-medium">{{ 'room_name' | i18next }}</label>
       <input
         pInputText
+        i18nextValidationMessage
         formControlName="name"
         [placeholder]="'room_name_placeholder' | i18next"
         class="w-full"
@@ -36,7 +37,7 @@
           formControlName="password"
           [feedback]="false"
           [toggleMask]="true"
-          styleClass="w-full"
+          class="w-full"
           inputStyleClass="w-full"
           [placeholder]="'room_password_placeholder' | i18next" />
       </div>

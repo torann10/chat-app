@@ -13,6 +13,7 @@ export class ThemeService {
   readonly isDark = signal(this.loadPreference());
 
   constructor() {
+    console.log("theme: " + this.isDark());
     this.applyClass(this.isDark());
 
     effect(() => {
@@ -34,6 +35,7 @@ export class ThemeService {
   }
 
   private loadPreference(): boolean {
+    console.log("isBrowser: " + this.isBrowser);
     if (!this.isBrowser) return true;
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored !== null ? stored === 'dark' : true;

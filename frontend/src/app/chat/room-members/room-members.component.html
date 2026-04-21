@@ -86,7 +86,7 @@
                   {{ member.user.fullname || member.user.email }}
                 </span>
                 @if (member.user.id === currentUserId()) {
-                  <span class="text-xs text-muted">{{ 'you_indicator' | i18next }}</span>
+                  <span class="text-xs text-muted">{{ 'you' | i18next }}</span>
                 }
               </div>
               @if (member.user.fullname) {

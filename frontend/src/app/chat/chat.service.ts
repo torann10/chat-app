@@ -211,13 +211,11 @@ export class ChatService {
 
     this.apiService.sendMessage(room.id, trimmed).subscribe({
       next: (confirmed) => {
-        // Swap the optimistic placeholder with the persisted message.
         this.messages.update((msgs) =>
           msgs.map((m) => (m.id === tempId ? confirmed : m))
         );
       },
       error: () => {
-        // Remove the optimistic message if the request fails.
         this.messages.update((msgs) => msgs.filter((m) => m.id !== tempId));
       },
     });  

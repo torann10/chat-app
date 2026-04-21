@@ -24,6 +24,8 @@ export class SidebarUserMenuComponent {
   private i18n = inject(I18NEXT_SERVICE);
   protected readonly theme = inject(ThemeService);
 
+  protected readonly currentUserName = this.authService.currentUser()?.email;
+
   protected readonly currentLang = signal(this.i18n.language ?? 'en');
 
   protected readonly menuItems = computed<MenuItem[]>(() => [

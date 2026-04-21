@@ -12,9 +12,11 @@ import { isPlatformBrowser } from '@angular/common';
 import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import i18nextOptions from './i18next.options';
+import { ThemeService } from './theme/theme.service';
 
 export function appInit() {
   return () => {
+    const _ = inject(ThemeService);
     const i18next = inject(I18NEXT_SERVICE);
     const platformId = inject(PLATFORM_ID);
 

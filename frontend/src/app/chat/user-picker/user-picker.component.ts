@@ -9,6 +9,7 @@ import { toSignal } from '@angular/core/rxjs-interop'
 import { ApiService } from '../../api/api.service';
 import { User } from 'shared';
 import { I18NextCapPipe, I18NextPipe } from 'angular-i18next';
+import { InputTextModule } from 'primeng/inputtext';
 
 const AVATAR_COLORS = [
   '#6366f1', '#8b5cf6', '#ec4899',
@@ -24,7 +25,8 @@ const AVATAR_COLORS = [
     SkeletonModule,
     I18NextPipe,
     ReactiveFormsModule,
-    I18NextCapPipe
+    I18NextCapPipe,
+    InputTextModule
   ],
   templateUrl: './user-picker.component.html',
 })

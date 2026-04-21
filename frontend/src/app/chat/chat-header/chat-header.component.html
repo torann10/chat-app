@@ -1,4 +1,4 @@
-<header class="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 px-4">
+<header class="flex h-14 shrink-0 items-center gap-3 border-b border-border px-4">
 
   <p-button
     class="flex h-8 w-8 rounded-md transition-colors md:hidden"
@@ -17,13 +17,13 @@
         <h2 class="truncate font-semibold">{{ r.name }}</h2>
       }
     } @else {
-      <h2 class="text-app-subtle">Select a room</h2>
+      <h2 class="text-muted">{{ 'select_room' | i18next }}</h2>
     }
 
     @if (activeUsersCount() > 0) {
       <div class="hidden sm:flex items-center gap-1.5 ml-2 shrink-0">
         <div class="h-2 w-2 rounded-full bg-green-500"></div>
-        <span class="text-xs text-app-muted">{{ activeUsersCount() + 'online' | i18next }} </span>
+        <span class="text-xs text-muted">{{ activeUsersCount() + 'online' | i18next }} </span>
       </div>
     }
   </div>
