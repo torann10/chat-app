@@ -24,15 +24,15 @@ export class SocketService {
       autoConnect: true,
     });
 
-    this.socket.on('connect', () => console.log('[Socket] Connected'));
-    this.socket.on('disconnect', () => console.log('[Socket] Disconnected'));
-    this.socket.on('connect_error', (err) =>
-      console.warn('[Socket] Error:', err.message)
-    );
-
-    if (this.messageCallback)     this.socket.on('new_message',        this.messageCallback);
-    if (this.userStatusCallback)  this.socket.on('user_status_change', this.userStatusCallback);
-    if (this.roomInvitedCallback) this.socket.on('room_invited',       this.roomInvitedCallback);
+    if (this.messageCallback) {
+      this.socket.on('new_message', this.messageCallback);
+    }     
+    if (this.userStatusCallback) {
+      this.socket.on('user_status_change', this.userStatusCallback);
+    } 
+    if (this.roomInvitedCallback) {
+      this.socket.on('room_invited', this.roomInvitedCallback);
+    } 
   }
 
   reconnect(): void {

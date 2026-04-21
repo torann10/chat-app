@@ -62,7 +62,11 @@ router.post('/', validateBody(CreateRoomSchema), async (req, res) => {
       notifyInvitedMembers(req, room.id, [Number(otherUserId)], req.user.id);
     }
 
-    res.status(201).json(room);
+    res.status(201).json({
+      ...room,
+      membership: {role: 'admin', joinedAt: new Date()},
+      unreadCount: 0
+    });
   } catch (err) {
     res.status(err.status ?? 400).json({error: err.message});
   }

@@ -36,9 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   updatePageTitle(title: string): void {
-      const newTitle = title || 'application_title';
-      console.log('Setting page title:', newTitle);
-      //this.title.setTitle(newTitle);
-      console.log('Setting page title end:', newTitle);
+      const newTitle = title || 'title';
+      this.title.set(newTitle);
     }
 }
