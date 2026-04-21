@@ -1,5 +1,5 @@
 <div
-  class="flex gap-2 px-1 py-0.5 group"
+  class="flex gap-2 px-1 py-0.5 group w-full"
   [class.flex-row-reverse]="message().senderId === currentUserId()"
 >
   @if (message().senderId !== currentUserId()) {
@@ -30,7 +30,7 @@
     }
     
     <div
-      class="rounded-2xl px-3.5 py-2 text-sm break-words"
+      class="rounded-2xl px-3.5 py-2 text-sm break-words w-full"
       [class.rounded-tr-sm]="message().senderId === currentUserId()"
       [class.rounded-tl-sm]="message().senderId !== currentUserId()"
       [class.bg-canvas-hover]="message().senderId === currentUserId()"

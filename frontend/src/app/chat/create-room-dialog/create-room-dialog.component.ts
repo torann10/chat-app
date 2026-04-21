@@ -33,15 +33,15 @@ export class CreateRoomDialogComponent {
 
   get typeOptions(): { label: string; value: 'public' | 'private' | 'password' }[] {
     return [
-      { label: this.i18next.t('room_type_public'),   value: 'public' },
-      { label: this.i18next.t('room_type_private'),  value: 'private' },
+      { label: this.i18next.t('room_type_public'), value: 'public' },
+      { label: this.i18next.t('room_type_private'), value: 'private' },
       { label: this.i18next.t('room_type_password'), value: 'password' },
     ];
   }
 
   form = this.fb.nonNullable.group({
-    type:     ['public' as 'public' | 'private' | 'password'],
-    name:     ['', [Validators.required, Validators.maxLength(100)]],
+    type: ['public' as 'public' | 'private' | 'password'],
+    name: ['', [Validators.required, Validators.maxLength(100)]],
     password: [''],
   });
 

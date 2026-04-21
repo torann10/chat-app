@@ -18,21 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.primeng.ripple.set(true);
-
-    this.i18NextService.events.languageChanged.subscribe(() => {
-      const root = this.router.routerState.root;
-      if (root != null && root.firstChild != null) {
-        const data = root.firstChild.data;
-        data
-          .pipe(
-            tap((data) => {
-              this.updatePageTitle(data && data['value'] && data['value'].title);
-            })
-          )
-          .subscribe();
-
-      }
-    });
   }
 
   updatePageTitle(title: string): void {

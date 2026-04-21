@@ -52,7 +52,7 @@
   "room_type": "Típus",
   "room_type_public": "Nyilvános",
   "room_type_private": "Privát",
-  "room_type_password": "Jelszóval védett",
+  "room_type_password": "Jelszó",
   "room_name": "Név",
   "room_name_placeholder": "pl. bejelentések",
   "room_password_placeholder": "Szoba jelszava",
