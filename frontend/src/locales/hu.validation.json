@@ -1,1 +1,21 @@
-{}
+{
+  "control_specific": {
+    "email": {
+      "required": "Az e-mail cím megadása kötelező.",
+      "email": "Kérjük, érvényes e-mail címet adjon meg."
+    },
+    "password": {
+      "required": "A jelszó megadása kötelező.",
+      "minlength": "A jelszónak legalább 6 karakterből kell állnia."
+    },
+    "fullname": {
+      "required": "A teljes név megadása kötelező.",
+      "minlength": "Legalább 3 karakter szükséges.",
+      "maxlength": "A név nem lehet hosszabb 32 karakternél."
+    },
+    "name": {
+      "required": "A szoba nevének megadása kötelező.",
+      "maxlength": "A név nem lehet hosszabb 100 karakternél."
+    }
+  }
+}

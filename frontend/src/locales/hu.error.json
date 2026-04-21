@@ -1,1 +1,5 @@
-{}
+{
+  "invalid_credentials": "Érvénytelen e-mail cím vagy jelszó. Kérjük, próbálja újra.",
+  "sign_up_failed": "A regisztráció sikertelen. Az e-mail cím vagy a felhasználónév már foglalt.",
+  "join_failed": "Nem sikerült csatlakozni a szobához. Kérjük, próbálja újra."
+}

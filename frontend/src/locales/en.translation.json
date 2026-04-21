@@ -21,7 +21,6 @@
   "send": "Send",
   "toggle_sidebar": "Toggle sidebar",
   "members": "Members",
-  "settings": "Settings",
   "online": "online",
   "offline": "offline",
   "loading": "Loading...",
@@ -65,5 +64,5 @@
   "no_users_found": "No users found",
   "language": "Language",
   "lang_en": "English",
-  "lang_hu": "Magyar"
+  "lang_hu": "Hungarian"
 }
