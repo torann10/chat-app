@@ -1,4 +1,4 @@
-import { Component, input, model, output, viewChild } from '@angular/core';
+import { Component, input, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { I18NextPipe } from 'angular-i18next';
 import { DialogModule} from 'primeng/dialog';
 import { UserPickerComponent } from '../user-picker/user-picker.component';
@@ -12,6 +12,8 @@ import { User } from 'shared';
     UserPickerComponent
   ],
   templateUrl: './create-dm-dialog.component.html',
+  styleUrl: './create-dm-dialog.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class CreateDmDialogComponent {
   visible = model(false);

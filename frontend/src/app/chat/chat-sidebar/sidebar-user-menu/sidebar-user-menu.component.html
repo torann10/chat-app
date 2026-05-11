@@ -1,13 +1,13 @@
-<div class="flex items-center gap-2.5">
-  <div class="relative shrink-0">
+<div class="user-profile">
+  <div class="avatar-wrapper">
     <p-avatar label="Y" shape="circle" />
   </div>
 
-  <div class="min-w-0 flex-1">
-    <div class="truncate text-sm font-medium">{{ currentUserName }}</div>
-    <div class="hidden sm:flex items-center gap-1.5 shrink-0">
-      <div class="h-2 w-2 rounded-full bg-green-500"></div>
-      <span class="text-xs">{{ 'online' | i18next }}</span>
+  <div class="info">
+    <div class="name">{{ currentUserName }}</div>
+    <div class="status">
+      <div class="status-indicator"></div>
+      <span class="status-text">{{ 'online' | i18next }}</span>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
     @if (item.label) {
       {{ item.label }}
     } @else {
-      <p-divider class="my-0!" />
+      <p-divider/>
     }
   </ng-template>
 </p-menu>

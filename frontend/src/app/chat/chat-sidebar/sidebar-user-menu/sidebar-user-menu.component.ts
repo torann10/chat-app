@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ViewEncapsulation } from '@angular/core';
 import { AvatarModule } from "primeng/avatar";
 import { ButtonModule } from "primeng/button";
 import { MenuModule } from "primeng/menu";
@@ -18,6 +18,8 @@ import { MenuItem } from 'primeng/api';
     I18NextPipe
   ],
   templateUrl: './sidebar-user-menu.component.html',
+  styleUrl: './sidebar-user-menu.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarUserMenuComponent {
   private authService = inject(AuthService);

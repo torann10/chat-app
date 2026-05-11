@@ -4,12 +4,12 @@
   [modal]="true"
   [draggable]="false"
   [resizable]="false"
-  styleClass="w-[420px]"
+  styleClass="join-room-dialog"
   (onHide)="close()">
 
-  <div class="flex flex-col gap-4 py-1">
+  <div class="join-room-content">
 
-    <p class="text-sm text-muted">
+    <p class="join-room-info">
       @if (isPasswordRoom) {
         {{ 'room_password_protected' | i18next }}
       } @else {
@@ -21,27 +21,27 @@
     </p>
 
     @if (isPasswordRoom) {
-      <form [formGroup]="form" class="flex flex-col gap-2">
-        <label class="text-sm font-medium">{{ 'password' | i18next }}</label>
+      <form [formGroup]="form" class="join-room-form">
+        <label class="join-room-label">{{ 'password' | i18next }}</label>
         <p-password
           formControlName="password"
           [feedback]="false"
           [toggleMask]="true"
           class="w-full"
-          inputStyleClass="w-full"
+          inputStyleClass="join-room-input"
           [placeholder]="'enter_room_password' | i18next"
           (keydown.enter)="submit()" />
       </form>
     }
 
     @if (error()) {
-      <p class="text-sm text-red-500">{{ error() }}</p>
+      <p class="join-room-error">{{ error() }}</p>
     }
 
   </div>
 
   <ng-template pTemplate="footer">
-    <div class="flex justify-end gap-2">
+    <div class="join-room-footer">
       <p-button
         [label]="'cancel' | i18next"
         severity="secondary"

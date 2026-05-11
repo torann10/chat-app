@@ -1,4 +1,4 @@
-import { Component, inject, model, output } from '@angular/core';
+import { Component, inject, model, output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { I18NEXT_SERVICE, I18NextPipe, ITranslationService } from 'angular-i18next';
 import { CreateRoomBody } from 'shared';
@@ -22,6 +22,8 @@ import { I18NextValidationMessageDirective } from 'angular-i18next/forms';
     I18NextValidationMessageDirective
   ],
   templateUrl: './create-room-dialog.component.html',
+  styleUrl: './create-room-dialog.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class CreateRoomDialogComponent {
   visible = model(false);

@@ -1,20 +1,20 @@
 <p-drawer
   [(visible)]="visible"
   position="right"
-  styleClass="!w-80"
+  styleClass="members-drawer"
   [showCloseIcon]="false">
 
   <ng-template pTemplate="header">
-    <div class="flex w-full items-center justify-between">
+    <div class="header">
 
       @if (view() === 'list') {
-        <div class="flex items-center gap-1.5">
-          <span class="font-semibold">{{ 'members' | i18next }}</span>
+        <div class="header-group">
+          <span class="title">{{ 'members' | i18next }}</span>
           @if (!isLoading()) {
-            <span class="text-sm text-muted">({{ members().length }})</span>
+            <span class="count">({{ members().length }})</span>
           }
         </div>
-        <div class="flex items-center gap-1">
+        <div class="header-group header-group-tight">
           @if (isAdmin()) {
             <p-button
               icon="pi pi-user-plus"
@@ -35,7 +35,7 @@
             (onClick)="visible.set(false)" />
         </div>
       } @else {
-        <div class="flex items-center gap-1">
+        <div class="header-group header-group-tight">
           <p-button
             icon="pi pi-arrow-left"
             [text]="true"
@@ -43,7 +43,7 @@
             severity="secondary"
             size="small"
             (onClick)="view.set('list')" />
-          <span class="font-semibold">{{ 'add_member_title' | i18next }}</span>
+          <span class="title">{{ 'add_member_title' | i18next }}</span>
         </div>
         <p-button
           icon="pi pi-times"
@@ -58,13 +58,13 @@
   </ng-template>
 
   @if (view() === 'list') {
-    <div class="flex flex-col gap-1 pt-1">
+    <div class="list">
 
       @if (isLoading()) {
         @for (row of skeletonRows; track $index) {
-          <div class="flex items-center gap-3 rounded-lg px-2 py-2.5">
-            <p-skeleton shape="circle" size="2.25rem" styleClass="shrink-0" />
-            <div class="flex flex-1 flex-col gap-1.5">
+          <div class="list-item">
+            <p-skeleton shape="circle" size="2.25rem" class="avatar" />
+            <div class="skeleton-text">
               <p-skeleton height="0.75rem" width="55%" />
               <p-skeleton height="0.625rem" width="40%" />
             </div>
@@ -72,35 +72,35 @@
         }
       } @else {
         @for (member of members(); track member.user.id) {
-          <div class="flex items-center gap-3 rounded-lg px-2 py-2 group">
+          <div class="list-item">
 
             <p-avatar
               [label]="initials(member.user)"
               shape="circle"
               [style]="avatarStyle(member.user.id)"
-              class="shrink-0 !text-xs !font-semibold" />
+              class="avatar avatar-text-sm" />
 
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="truncate text-sm font-medium">
+            <div class="info">
+              <div class="name-group">
+                <span class="name">
                   {{ member.user.fullname || member.user.email }}
                 </span>
                 @if (member.user.id === currentUserId()) {
-                  <span class="text-xs text-muted">{{ 'you' | i18next }}</span>
+                  <span class="you-badge">{{ 'you' | i18next }}</span>
                 }
               </div>
               @if (member.user.fullname) {
-                <p class="truncate text-xs text-muted">{{ member.user.email }}</p>
+                <p class="email">{{ member.user.email }}</p>
               }
             </div>
 
             <p-tag
               [value]="(member.role === 'admin' ? 'role_admin' : 'role_member') | i18next"
               [severity]="member.role === 'admin' ? 'warn' : 'secondary'"
-              class="shrink-0 text-xs" />
+              class="role-tag" />
 
             @if (isAdmin() && member.user.id !== currentUserId()) {
-              <div class="flex shrink-0 items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="item-actions">
                 <p-button
                   [icon]="member.role === 'admin' ? 'pi pi-arrow-down-right' : 'pi pi-arrow-up-right'"
                   [pTooltip]="(member.role === 'admin' ? 'demote_to_member' : 'promote_to_admin') | i18next"
@@ -128,13 +128,13 @@
         }
 
         @if (room()?.type !== 'dm') {
-          <div class="mt-3 border-t border-border pt-3">
+          <div class="footer">
             <p-button
               [label]="'leave_room' | i18next"
               icon="pi pi-sign-out"
               severity="danger"
               [outlined]="true"
-              styleClass="w-full"
+              styleClass="btn-full"
               [loading]="actioningId() === currentUserId()"
               (onClick)="leaveRoom()" />
           </div>
@@ -145,7 +145,7 @@
   }
 
   @if (view() === 'add') {
-    <div class="pt-1">
+    <div class="add-view">
       <app-user-picker
         [excludeIds]="memberIds()"
         (userSelected)="addMember($event)" />
