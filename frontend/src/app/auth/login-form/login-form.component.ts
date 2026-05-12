@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { I18NextPipe } from 'angular-i18next';
 import { SocialAuthComponent } from "../social-auth/social-auth.component";
 import { PasswordModule } from 'primeng/password';
@@ -22,6 +22,8 @@ import { InputTextModule } from 'primeng/inputtext';
     RouterLink
   ],
   templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginFormComponent {
   private fb = inject(FormBuilder);

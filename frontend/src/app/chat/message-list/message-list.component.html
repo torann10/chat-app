@@ -1,24 +1,27 @@
-<div class="flex flex-1 flex-col overflow-y-auto h-full w-full">
+<div class="message-list">
   @if (isLoadingTop()) {
-    <div class="flex flex-1 items-center justify-center">
-      <div class="flex items-center gap-2">
+    <div class="status-wrapper">
+      <div class="loading-content">
         <i class="pi pi-spin pi-spinner"></i>
-        <span class="text-sm">{{ 'loading_messages' | i18next }}</span>
+        <span class="loading-text">{{ 'loading_messages' | i18next }}</span>
       </div>
     </div>
   }
 
   @if (messages().length === 0) {
-    <div class="flex flex-1 items-center justify-center">
-      <div class="text-center text-muted">
-        <i class="pi pi-comments mb-3 block text-4xl opacity-40"></i>
-        <p class="text-sm">{{ 'no_messages' | i18next }}</p>
+    <div class="status-wrapper">
+      <div class="empty-content">
+        <i class="pi pi-comments empty-icon"></i>
+        <p class="empty-text">{{ 'no_messages' | i18next }}</p>
       </div>
     </div>
   }
 
   @for (msg of messages(); track msg.id; let i = $index; let first = $first) {
-    <div [class.pb-1]="messages()[i + 1]?.senderId === msg.senderId" [class.pb-4]="messages()[i + 1]?.senderId !== msg.senderId" [attr.data-msg-index]="i">
+    <div 
+      [class.item-grouped]="messages()[i + 1]?.senderId === msg.senderId" 
+      [class.item-separated]="messages()[i + 1]?.senderId !== msg.senderId" 
+      [attr.data-msg-index]="i">
       <app-message-item
         [message]="msg"
         [showSender]="first || messages()[i - 1]?.senderId !== msg.senderId"
@@ -27,10 +30,10 @@
   }
   
   @if (isLoadingBottom()) {
-    <div class="flex flex-1 items-center justify-center">
-      <div class="flex items-center gap-2">
+    <div class="status-wrapper">
+      <div class="loading-content">
         <i class="pi pi-spin pi-spinner"></i>
-        <span class="text-sm">{{ 'loading_messages' | i18next }}</span>
+        <span class="loading-text">{{ 'loading_messages' | i18next }}</span>
       </div>
     </div>
   }

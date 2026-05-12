@@ -13,6 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
     I18NextPipe
   ],
   templateUrl: './message-input.component.html',
+  styleUrl: './message-input.component.scss',
 })
 export class MessageInputComponent {
   protected readonly messageText = signal('');

@@ -23,6 +23,7 @@ import { RoomMembersComponent } from "../room-members/room-members.component";
     RoomMembersComponent
 ],
   templateUrl: './chat-layout.component.html',
+  styleUrl: './chat-layout.component.scss',
 })
 export class ChatLayoutComponent {
   protected readonly sidebarOpen = signal(false);

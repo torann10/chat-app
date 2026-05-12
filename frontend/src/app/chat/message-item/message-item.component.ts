@@ -13,6 +13,7 @@ import { AuthService } from '../../auth/auth.service';
     AvatarModule
 ],
   templateUrl: './message-item.component.html',
+  styleUrl: './message-item.component.scss',
 })
 export class MessageItem {
   message = input.required<Message>();

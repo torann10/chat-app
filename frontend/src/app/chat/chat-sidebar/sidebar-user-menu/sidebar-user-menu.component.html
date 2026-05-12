@@ -21,7 +21,7 @@
   />
 </div>
 
-<p-menu #menu [model]="menuItems()" [popup]="true">
+<p-menu #menu [model]="menuItems()" [popup]="true" appendTo="body">
   <ng-template pTemplate="submenuheader" let-item>
     @if (item.label) {
       {{ item.label }}

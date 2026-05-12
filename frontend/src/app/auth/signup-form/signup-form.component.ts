@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { SocialAuthComponent } from "../social-auth/social-auth.component";
@@ -22,6 +22,8 @@ import { InputTextModule } from 'primeng/inputtext';
     RouterLink
   ],
   templateUrl: './signup-form.component.html',
+  styleUrl: './signup-form.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class SignupFormComponent {
   private fb = inject(FormBuilder);

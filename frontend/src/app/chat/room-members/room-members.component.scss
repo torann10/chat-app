@@ -59,9 +59,9 @@
     flex-shrink: 0;
 
     &-text-sm {
-      ::ng-deep .p-avatar-text {
-        font-size: 0.75rem !important;
-        font-weight: 600 !important;
+      .p-avatar-label {
+        font-size: 0.75rem;
+        font-weight: 600;
       }
     }
   }

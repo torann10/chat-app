@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal, ViewEncapsulation } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -29,6 +29,7 @@ const AVATAR_COLORS = [
     InputTextModule
   ],
   templateUrl: './user-picker.component.html',
+  styleUrl: './user-picker.component.scss',
 })
 export class UserPickerComponent {
   private apiService = inject(ApiService);

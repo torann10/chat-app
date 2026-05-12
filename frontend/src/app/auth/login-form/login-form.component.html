@@ -1,26 +1,26 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-5">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="login-form">
 
-  <div class="space-y-1">
-    <h2 class="text-xl font-bold">{{ 'welcome_back' | i18next }}</h2>
-    <p class="text-sm">{{ 'enter_credentials' | i18next}}</p>
+  <div class="header">
+    <h2 class="title">{{ 'welcome_back' | i18next }}</h2>
+    <p class="subtitle">{{ 'enter_credentials' | i18next}}</p>
   </div>
 
   @if (error(); as err) {
-    <div class="flex items-start gap-2 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">
-      <i class="pi pi-exclamation-circle mt-0.5 shrink-0"></i>
+    <div class="error">
+      <i class="pi pi-exclamation-circle error-icon"></i>
       <span>{{ err | i18next }}</span>
     </div>
   }
 
-  <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium" for="login-email">{{ 'email' | i18next }}</label>
+  <div class="group">
+    <label class="label" for="login-email">{{ 'email' | i18next }}</label>
     <input i18nextValidationMessage pInputText id="login-email" type="email" formControlName="email"
-           placeholder="you@example.com" class="w-full" autocomplete="email" />
+           placeholder="you@example.com" class="input" autocomplete="email" />
   </div>
 
-  <div class="flex flex-col gap-1.5">
-    <div class="flex items-center justify-between">
-      <label class="text-sm font-medium" for="login-password">{{ 'password' | i18next }}</label>
+  <div class="group">
+    <div class="label-wrapper">
+      <label class="label" for="login-password">{{ 'password' | i18next }}</label>
     </div>
     <p-password 
       i18nextValidationMessage 
@@ -29,7 +29,7 @@
       [toggleMask]="true" 
       [feedback]="false" 
       placeholder="••••••••" 
-      inputStyleClass="w-full" 
+      inputStyleClass="input" 
       autocomplete="current-password" 
     />
   </div>
@@ -41,12 +41,12 @@
     iconPos="right"
     [disabled]="isLoading()" 
     [loading]="isLoading()" 
-    styleClass="w-full"
+    styleClass="button"
   />
 
-  <div class="relative my-2">
-    <div class="relative flex justify-center">
-      <span class="px-3 text-xs">{{ 'or_continue_with' | i18next }}</span>
+  <div class="divider">
+    <div class="divider-content">
+      <span class="divider-text">{{ 'or_continue_with' | i18next }}</span>
     </div>
   </div>
 
@@ -54,9 +54,9 @@
 
 </form>
 
-<div class="mt-6 text-center text-sm">
+<div class="login-footer">
   {{ 'no_account' | i18next }}
-  <a routerLink="/auth/signup" class="font-medium hover:underline">
+  <a routerLink="/auth/signup" class="link">
     {{ 'sign_up' | i18next }}
   </a>
 </div>

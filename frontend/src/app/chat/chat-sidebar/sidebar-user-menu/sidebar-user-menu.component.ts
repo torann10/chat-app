@@ -19,7 +19,6 @@ import { MenuItem } from 'primeng/api';
   ],
   templateUrl: './sidebar-user-menu.component.html',
   styleUrl: './sidebar-user-menu.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarUserMenuComponent {
   private authService = inject(AuthService);
