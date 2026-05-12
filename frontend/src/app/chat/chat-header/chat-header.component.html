@@ -23,7 +23,7 @@
     @if (activeUsersCount() > 0) {
       <div class="online-status">
         <div class="status-indicator"></div>
-        <span class="status-text">{{ activeUsersCount() + 'online' | i18next }} </span>
+        <span class="status-text">{{ 'members_online' | i18next: {count: activeUsersCount()} }} </span>
       </div>
     }
   </div>
