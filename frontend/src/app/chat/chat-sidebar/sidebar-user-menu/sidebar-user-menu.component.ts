@@ -55,7 +55,7 @@ export class SidebarUserMenuComponent {
         {
           label: this.i18n.t('log_out'),
           icon: 'pi pi-sign-out',
-          styleClass: '[&_*]:!text-red-500',
+          styleClass: 'log-out',
           command: () => this.authService.logout(),
         },
       ],

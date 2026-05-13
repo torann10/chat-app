@@ -71,3 +71,17 @@ $bp-md:  768px;
 $bp-lg:  1024px;
 $bp-xl:  1280px;
 $bp-2xl: 1536px;
+
+.log-out {
+  .p-menu-item-content,
+  .p-menu-item-icon {
+    color: $color-red-500;
+
+    .p-menu-item-link:hover {
+      .p-menu-item-label,
+      .p-menu-item-icon {
+        color: $color-red-500 !important;
+      }
+    }
+  }
+}
