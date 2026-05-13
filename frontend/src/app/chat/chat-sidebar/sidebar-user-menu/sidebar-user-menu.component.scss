@@ -1,4 +1,4 @@
-@import '../../../../styles.scss'; 
+@use '../../../../styles.scss'; 
 
 .user-profile {
   display: flex;
@@ -26,7 +26,7 @@
   .status {
     display: none;
 
-    @media (min-width: $bp-sm) {
+    @media (min-width: styles.$bp-sm) {
       display: flex;
     }
     
@@ -39,7 +39,7 @@
     height: 0.5rem;
     width: 0.5rem;
     border-radius: 9999px;
-    background-color: $color-green-500;
+    background-color: styles.$color-green-500;
   }
 
   .status-text {

@@ -1,4 +1,4 @@
-@import '../../../styles.scss'; 
+@use '../../../styles.scss'; 
 
 app-chat-sidebar {
   display: flex;
@@ -12,7 +12,7 @@ app-chat-sidebar {
   height: 3.5rem;
   flex-shrink: 0;
   gap: 0.625rem;
-  border-bottom: 1px solid $color-border;
+  border-bottom: 1px solid styles.$color-border;
   padding: 0 1rem;
 }
 
@@ -23,7 +23,7 @@ app-chat-sidebar {
   height: 1.75rem;
   width: 1.75rem;
   border-radius: 0.5rem;
-  background-color: $color-primary-600;
+  background-color: styles.$color-primary-600;
 }
 
 .logo-icon {
@@ -62,7 +62,7 @@ app-chat-sidebar {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: $color-muted;
+  color: styles.$color-muted;
 }
 
 .submenu-action {
@@ -74,12 +74,12 @@ app-chat-sidebar {
   border-radius: 0.25rem;
   border: none;
   background: transparent;
-  color: $color-muted;
+  color: styles.$color-muted;
   transition: background-color 0.15s, color 0.15s;
   cursor: pointer;
 
   &:hover {
-    background-color: $color-canvas-hover;
+    background-color: styles.$color-canvas-hover;
     color: inherit;
   }
 }
@@ -98,20 +98,20 @@ app-chat-sidebar {
   cursor: pointer;
 
   &:hover {
-    background-color: $color-canvas-hover;
+    background-color: styles.$color-canvas-hover;
   }
 
   &-active {
-    background-color: $color-highlight-bg;
-    color: $color-highlight;
+    background-color: styles.$color-highlight-bg;
+    color: styles.$color-highlight;
 
     &:hover {
-      background-color: $color-highlight-bg; 
+      background-color: styles.$color-highlight-bg; 
     }
   }
 
   &-muted {
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 }
 
@@ -140,15 +140,15 @@ app-chat-sidebar {
   height: 0.5rem;
   border-radius: 9999px;
   flex-shrink: 0;
-  background-color: $color-surface-400;
+  background-color: styles.$color-surface-400;
 
   &-online {
-    background-color: $color-green-500;
+    background-color: styles.$color-green-500;
   }
 }
 
 .footer {
   flex-shrink: 0;
-  border-top: 1px solid $color-border;
+  border-top: 1px solid styles.$color-border;
   padding: 0.625rem 0.75rem;
 }

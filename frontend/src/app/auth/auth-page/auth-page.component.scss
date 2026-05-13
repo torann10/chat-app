@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@use '../../../styles.scss';
 
 .auth-layout {
   display: flex;
@@ -8,7 +8,7 @@
   justify-content: center;
   padding: 3rem 1rem;
 
-  & .header {
+  .header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +17,7 @@
     text-align: center;
   }
 
-  & .logo-box {
+  .logo-box {
     display: flex;
     height: 3.5rem;
     width: 3.5rem;
@@ -27,28 +27,28 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); 
   }
 
-  & .logo-icon {
+  .logo-icon {
     font-size: 1.5rem;
   }
 
-  & .title {
+  .title {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
   }
 
-  & .card {
+  .card {
     width: 100%;
     max-width: 28rem;
     border-radius: 1rem;
-    border: 1px solid $color-border;
+    border: 1px solid styles.$color-border;
     padding: 2rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
   }
 
-  & .footer {
+  .footer {
     margin-top: 2rem;
     font-size: 0.75rem;
-    color: $color-muted; 
+    color: styles.$color-muted; 
   }
 }

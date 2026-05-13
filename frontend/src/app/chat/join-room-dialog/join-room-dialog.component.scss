@@ -1,4 +1,4 @@
-@import '../../../styles.scss'; 
+@use '../../../styles.scss'; 
 
 .join-room-dialog {
   width: 420px;
@@ -17,7 +17,7 @@
 
   &-info {
     font-size: 0.875rem;
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 
   &-form {
@@ -37,7 +37,7 @@
 
   &-error {
     font-size: 0.875rem;
-    color: $color-red-500;
+    color: styles.$color-red-500;
     margin: 0;
   }
 

@@ -1,22 +1,22 @@
-@import '../../../styles.scss';
+@use '../../../styles.scss';
 
 .chat-layout {
   display: flex;
   height: 100dvh;
   overflow: hidden;
   
-  & .backdrop {
+  .backdrop {
     position: fixed;
     inset: 0;
     z-index: 20;
-    background-color: color-mix(in srgb, $color-surface-950 60%, transparent);
+    background-color: color-mix(in srgb, styles.$color-surface-950 60%, transparent);
 
-    @media (min-width: $bp-md) {
+    @media (min-width: styles.$bp-md) {
       display: none;
     }
   }
 
-  & .sidebar {
+  .sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -26,11 +26,11 @@
     height: 100%;
     width: 18rem;
     flex-direction: column;
-    border-right: 1px solid $color-border;
-    background-color: $color-sidebar;
+    border-right: 1px solid styles.$color-border;
+    background-color: styles.$color-sidebar;
     transition: transform 0.3s ease-in-out; 
 
-    @media (min-width: $bp-md) {
+    @media (min-width: styles.$bp-md) {
       position: relative;
       z-index: auto;
       transform: translateX(0) !important; 
@@ -41,14 +41,14 @@
     }
   }
 
-  & .main {
+  .main {
     display: flex;
     flex: 1 1 0%;
     flex-direction: column;
     min-width: 0;
   }
 
-  & .message-list {
+  .message-list {
     display: block;
     flex: 1 1 0%;
     min-height: 0;

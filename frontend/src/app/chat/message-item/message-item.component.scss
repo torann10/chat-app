@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@use '../../../styles.scss';
 
 .message-item {
   display: flex;
@@ -19,7 +19,7 @@
 
     .bubble {
       border-top-right-radius: 0.125rem !important;
-      background-color: $color-canvas-hover;
+      background-color: styles.$color-canvas-hover;
       color: inherit;
     }
   }
@@ -31,45 +31,45 @@
     
     .bubble {
       border-top-left-radius: 0.125rem;
-      background-color: $color-primary-500;
+      background-color: styles.$color-primary-500;
       color: white;
     }
   }
 
-  & .avatar-wrapper {
+  .avatar-wrapper {
     margin-top: 0.25rem;
     flex-shrink: 0;
   }
 
-  & .avatar-placeholder {
+  .avatar-placeholder {
     width: 2rem;
   }
 
-  & .content-wrapper {
+  .content-wrapper {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     max-width: 75%;
   }
 
-  & .header {
+  .header {
     display: flex;
     align-items: baseline;
     gap: 0.5rem;
     padding: 0 0.25rem;
   }
 
-  & .sender {
+  .sender {
     font-size: 0.75rem;
     font-weight: 600;
   }
 
-  & .time {
+  .time {
     font-size: 0.75rem;
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 
-  & .bubble {
+  .bubble {
     border-radius: 1rem;
     padding: 0.5rem 0.875rem;
     font-size: 0.875rem;
@@ -82,7 +82,7 @@
     }
   }
 
-  & .time-hover {
+  .time-hover {
     padding: 0 0.25rem;
     opacity: 0;
     transition: opacity 0.15s ease-in-out;

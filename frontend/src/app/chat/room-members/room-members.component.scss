@@ -1,16 +1,16 @@
-@import '../../../styles.scss'; 
+@use '../../../styles.scss'; 
 
 .members-drawer {
   width: 20rem !important;
 
-  & .header {
+  .header {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
   }
 
-  & .header-group {
+  .header-group {
     display: flex;
     align-items: center;
     gap: 0.375rem;
@@ -20,23 +20,23 @@
     }
   }
 
-  & .title {
+  .title {
     font-weight: 600;
   }
 
-  & .count {
+  .count {
     font-size: 0.875rem;
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 
-  & .list {
+  .list {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     padding-top: 0.25rem;
   }
 
-  & .list-item {
+  .list-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -48,14 +48,14 @@
     }
   }
 
-  & .skeleton-text {
+  .skeleton-text {
     display: flex;
     flex: 1 1 0%;
     flex-direction: column;
     gap: 0.375rem;
   }
 
-  & .avatar {
+  .avatar {
     flex-shrink: 0;
 
     &-text-sm {
@@ -66,19 +66,19 @@
     }
   }
 
-  & .info {
+  .info {
     min-width: 0;
     flex: 1 1 0%;
   }
 
-  & .name-group {
+  .name-group {
     display: flex;
     align-items: center;
     gap: 0.375rem;
     flex-wrap: wrap;
   }
 
-  & .name {
+  .name {
     font-size: 0.875rem;
     font-weight: 500;
     white-space: nowrap;
@@ -86,26 +86,26 @@
     text-overflow: ellipsis;
   }
 
-  & .you-badge {
+  .you-badge {
     font-size: 0.75rem;
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 
-  & .email {
+  .email {
     font-size: 0.75rem;
-    color: $color-muted;
+    color: styles.$color-muted;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  & .role-tag {
+  .role-tag {
     flex-shrink: 0;
     font-size: 0.75rem;
   }
 
-  & .item-actions {
+  .item-actions {
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -114,17 +114,17 @@
     transition: opacity 0.15s ease-in-out;
   }
 
-  & .footer {
+  .footer {
     margin-top: 0.75rem;
-    border-top: 1px solid $color-border;
+    border-top: 1px solid styles.$color-border;
     padding-top: 0.75rem;
   }
 
-  & .btn-full {
+  .btn-full {
     width: 100%;
   }
 
-  & .add-view {
+  .add-view {
     padding-top: 0.25rem;
   }
 }

@@ -1,20 +1,20 @@
-@import '../../../styles.scss'; 
+@use '../../../styles.scss'; 
 
 .user-picker {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 
-  & .search {
+  .search {
     width: 100%;
     display: block;
   }
 
-  & .input {
+  .input {
     width: 100%;
   }
 
-  & .list {
+  .list {
     max-height: 18rem;
     overflow-y: auto;
     margin-left: -0.25rem;
@@ -23,7 +23,7 @@
     padding-right: 0.25rem;
   }
 
-  & .skeleton-item {
+  .skeleton-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -31,34 +31,34 @@
     padding: 0.625rem 0.5rem;
   }
 
-  & .skeleton-info {
+  .skeleton-info {
     display: flex;
     flex: 1 1 0%;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  & .empty {
+  .empty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem 0;
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 
-  & .empty-icon {
+  .empty-icon {
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
     opacity: 0.4;
   }
 
-  & .empty-text {
+  .empty-text {
     font-size: 0.875rem;
     margin: 0;
   }
 
-  & .item {
+  .item {
     display: flex;
     width: 100%;
     align-items: center;
@@ -74,11 +74,11 @@
     transition: background-color 0.15s ease-in-out;
 
     &:hover {
-      background-color: $color-canvas-hover;
+      background-color: styles.$color-canvas-hover;
     }
   }
 
-  & .avatar {
+  .avatar {
     flex-shrink: 0;
 
     &-text-sm {
@@ -94,18 +94,18 @@
     font-weight: 600;
   }
 
-  & .info {
+  .info {
     min-width: 0;
     flex: 1 1 0%;
   }
 
-  & .name-row {
+  .name-row {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  & .name {
+  .name {
     font-size: 0.875rem;
     font-weight: 500;
     white-space: nowrap;
@@ -113,22 +113,22 @@
     text-overflow: ellipsis;
   }
 
-  & .status {
+  .status {
     display: inline-block;
     height: 0.375rem;
     width: 0.375rem;
     flex-shrink: 0;
     border-radius: 9999px;
-    background-color: $color-surface-400;
+    background-color: styles.$color-surface-400;
 
     &-online {
-      background-color: $color-green-500;
+      background-color: styles.$color-green-500;
     }
   }
 
-  & .email {
+  .email {
     font-size: 0.75rem;
-    color: $color-muted;
+    color: styles.$color-muted;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;

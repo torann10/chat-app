@@ -1,4 +1,4 @@
-@import '../../../styles.scss'; 
+@use '../../../styles.scss'; 
 
 .room-dialog {
   width: 480px;
@@ -18,12 +18,12 @@
     gap: 0.5rem;
   }
 
-  & .label {
+  .label {
     font-size: 0.875rem;
     font-weight: 500;
   }
 
-  & .input {
+  .input {
     width: 100%;
   }
 }

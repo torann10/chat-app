@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@use '../../../styles.scss';
 
 .message-list {
   display: flex;
@@ -8,41 +8,41 @@
   width: 100%;
   overflow-y: auto;
 
-  & .status-wrapper {
+  .status-wrapper {
     display: flex;
     flex: 1 1 0%;
     align-items: center;
     justify-content: center;
   }
 
-  & .loading-content {
+  .loading-content {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  & .loading-text {
+  .loading-text {
     font-size: 0.875rem;
   }
 
-  & .empty-content {
+  .empty-content {
     text-align: center;
-    color: $color-muted;
+    color: styles.$color-muted;
   }
 
-  & .empty-icon {
+  .empty-icon {
     display: block;
     margin-bottom: 0.75rem;
     font-size: 2.25rem;
     opacity: 0.4;
   }
 
-  & .empty-text {
+  .empty-text {
     font-size: 0.875rem;
     margin: 0;
   }
 
-  & .item {
+  .item {
     
     &-grouped {
       padding-bottom: 0.25rem;
