@@ -1,23 +1,21 @@
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
-import { I18NextPipe } from 'angular-i18next';
 import { SocialAuthComponent } from "../social-auth/social-auth.component";
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { I18NextValidationMessageDirective } from 'angular-i18next/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-form',
   imports: [
-    I18NextPipe, 
+    TranslatePipe, 
     SocialAuthComponent, 
     PasswordModule, 
     ButtonModule, 
     ReactiveFormsModule,
-    I18NextValidationMessageDirective,
     InputTextModule,
     RouterLink
   ],
@@ -52,7 +50,7 @@ export class LoginFormComponent {
     this.authService.login(this.form.getRawValue()).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: () => {
-        this.error.set('error:invalid_credentials');
+        this.error.set('error.invalid_credentials');
         this.isLoading.set(false);
       },
     });

@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
-import { I18NextPipe } from 'angular-i18next';
 import { PopoverModule } from 'primeng/popover';
 import { AvatarModule } from "primeng/avatar";
 import { SidebarUserMenuComponent } from "./sidebar-user-menu/sidebar-user-menu.component";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -15,7 +15,7 @@ import { SidebarUserMenuComponent } from "./sidebar-user-menu/sidebar-user-menu.
     CommonModule,
     MenuModule,
     BadgeModule,
-    I18NextPipe,
+    TranslatePipe,
     PopoverModule,
     AvatarModule,
     SidebarUserMenuComponent

@@ -5,13 +5,13 @@ import { ButtonModule } from "primeng/button";
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ChatService } from '../chat.service';
 import { Room } from 'shared';
-import { I18NextPipe } from 'angular-i18next';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-join-room-dialog',
   imports: [
     ReactiveFormsModule,
-    I18NextPipe,
+    TranslatePipe,
     DialogModule, 
     PasswordModule, 
     ButtonModule
@@ -64,7 +64,7 @@ export class JoinRoomDialogComponent {
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.error.set(err.error?.error ?? 'error:join_failed');
+        this.error.set(err.error?.error ?? 'error.join_failed');
       },
     });
   }

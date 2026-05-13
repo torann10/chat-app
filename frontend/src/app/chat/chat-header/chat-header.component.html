@@ -3,7 +3,7 @@
   <p-button
     class="toggle-button"
     (click)="toggleSidebar.emit()"
-    title="{{ 'toggle_sidebar' | i18next }}"
+    title="{{ 'app.toggle_sidebar' | translate }}"
     icon="pi pi-bars"
   />
 
@@ -17,13 +17,13 @@
         <h2 class="title">{{ r.name }}</h2>
       }
     } @else {
-      <h2 class="placeholder">{{ 'select_room' | i18next }}</h2>
+      <h2 class="placeholder">{{ 'app.select_room' | translate }}</h2>
     }
 
     @if (activeUsersCount() > 0) {
       <div class="online-status">
         <div class="status-indicator"></div>
-        <span class="status-text">{{ 'members_online' | i18next: {count: activeUsersCount()} }} </span>
+        <span class="status-text">{{ activeUsersCount() + 'app.online' | translate }} </span>
       </div>
     }
   </div>
@@ -35,7 +35,7 @@
         [text]="true"
         [rounded]="true"
         severity="secondary"
-        pTooltip="{{ 'members' | i18next }}"
+        pTooltip="{{ 'app.members' | translate }}"
         tooltipPosition="bottom"
         (onClick)="openMembers.emit()"
       />

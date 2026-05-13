@@ -5,11 +5,11 @@ import { Role, Room, RoomMember, User } from 'shared';
 import { UserPickerComponent } from '../user-picker/user-picker.component';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { I18NextPipe } from 'angular-i18next';
 import { AvatarModule } from 'primeng/avatar';
 import { SkeletonModule } from "primeng/skeleton";
 import { TagModule } from 'primeng/tag'; 
 import { DrawerModule } from 'primeng/drawer';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 const AVATAR_COLORS = [
@@ -22,7 +22,7 @@ const AVATAR_COLORS = [
   imports: [
     ButtonModule,
     UserPickerComponent,
-    I18NextPipe,
+    TranslatePipe,
     TooltipModule,
     AvatarModule,
     SkeletonModule,

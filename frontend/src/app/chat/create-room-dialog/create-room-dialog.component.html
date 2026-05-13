@@ -1,6 +1,6 @@
 <p-dialog
   [(visible)]="visible"
-  [header]="'create_room_dialog_title' | i18next"
+  [header]="'app.create_room_dialog_title' | translate"
   [modal]="true"
   [draggable]="false"
   [resizable]="false"
@@ -10,7 +10,7 @@
   <form [formGroup]="form" class="room-form">
 
     <div class="group">
-      <label class="label">{{ 'room_type' | i18next }}</label>
+      <label class="label">{{ 'app.room_type' | translate }}</label>
       <p-selectbutton
         formControlName="type"
         [options]="typeOptions"
@@ -20,26 +20,43 @@
     </div>
 
     <div class="group">
-      <label class="label">{{ 'room_name' | i18next }}</label>
+      <label class="label">{{ 'app.room_name' | translate }}</label>
       <input
         pInputText
-        i18nextValidationMessage
         formControlName="name"
-        [placeholder]="'room_name_placeholder' | i18next"
+        [placeholder]="'app.room_name_placeholder' | translate"
         class="input"
         autocomplete="off" />
+
+      @if (form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)) {
+        @if (form.get('name')?.hasError('required')) {
+          <small class="validation-error">{{ 'validation.name.required' | translate }}</small>
+        }
+        @if (form.get('name')?.hasError('maxlength')) {
+          <small class="validation-error">{{ 'validation.name.maxlength' | translate }}</small>
+        }
+      }
     </div>
 
     @if (selectedType === 'password') {
       <div class="group">
-        <label class="label">{{ 'password' | i18next }}</label>
+        <label class="label">{{ 'app.password' | translate }}</label>
         <p-password
           formControlName="password"
           [feedback]="false"
           [toggleMask]="true"
           class="input"
           inputStyleClass="input"
-          [placeholder]="'room_password_placeholder' | i18next" />
+          [placeholder]="'app.room_password_placeholder' | translate" />
+
+        @if (form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+          @if (form.get('password')?.hasError('required')) {
+            <small class="validation-error">{{ 'validation.password.required' | translate }}</small>
+          }
+          @if (form.get('password')?.hasError('minlength')) {
+            <small class="validation-error">{{ 'validation.password.minlength' | translate }}</small>
+          }
+        } 
       </div>
     }
 
@@ -48,12 +65,11 @@
   <ng-template pTemplate="footer">
     <div class="room-footer">
       <p-button
-        [label]="'cancel' | i18next"
+        [label]="'app.cancel' | translate"
         severity="secondary"
         (onClick)="close()" />
       <p-button
-        [label]="'create' | i18next"
-        [disabled]="!canSubmit"
+        [label]="'app.create' | translate"
         (onClick)="submit()" />
     </div>
   </ng-template>

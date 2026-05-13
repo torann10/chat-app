@@ -2,7 +2,7 @@
   <div class="logo">
     <i class="pi pi-comments logo-icon"></i>
   </div>
-  <span class="title">{{ 'title' | i18next }}</span>
+  <span class="title">{{ 'app.title' | translate }}</span>
 </div>
 
 <div class="content">
@@ -11,13 +11,13 @@
     <ng-template pTemplate="submenuheader" let-item>
       <div class="submenu-header">
         <span class="submenu-title">
-          {{ item.label | i18next }}
+          {{ 'app.' + item.label | translate }}
         </span>
         @if (item.data?.['addAction']) {
           <button
             type="button"
             class="submenu-action"
-            [title]="(item.data['addAction'] === 'room' ? 'create_room_tooltip' : 'new_dm_tooltip') | i18next"
+            [title]="(item.data['addAction'] === 'room' ? 'app.create_room_tooltip' : 'app.new_dm_tooltip') | translate"
             (click)="onAddClick(item.data['addAction'], $event)">
             <i class="pi pi-plus submenu-action-icon"></i>
           </button>

@@ -1,63 +1,87 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="signup-form">
 
   <div class="header">
-    <h2 class="title">{{ 'create_an_account' | i18next }}</h2>
-    <p class="subtitle">{{ 'fill_details' | i18next }}</p>
+    <h2 class="title">{{ 'app.create_an_account' | translate }}</h2>
+    <p class="subtitle">{{ 'app.fill_details' | translate }}</p>
   </div>
 
   @if (error(); as err) {
     <div class="error">
       <i class="pi pi-exclamation-circle error-icon"></i>
-      <span>{{ err | i18next }}</span>
+      <span>{{ err | translate }}</span>
     </div>
   }
 
   <div class="group">
-    <label class="label" for="signup-email">{{ 'email' | i18next }}</label>
+    <label class="label" for="signup-email">{{ 'app.email' | translate }}</label>
     <input 
       pInputText
-      i18nextValidationMessage 
       id="signup-email" 
       type="email" 
       formControlName="email"
       placeholder="you@example.com" 
       class="input" 
-      autocomplete="email" 
-    />
+      autocomplete="email" />
+
+    @if (form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
+      @if (form.get('email')?.hasError('required')) {
+        <small class="validation-error">{{ 'validation.email.required' | translate }}</small>
+      }
+      @if (form.get('email')?.hasError('email')) {
+        <small class="validation-error">{{ 'validation.email.email' | translate }}</small>
+      }
+    }
   </div>
 
   <div class="group">
-    <label class="label" for="signup-fullname">{{ 'fullname' | i18next }}</label>
+    <label class="label" for="signup-fullname">{{ 'app.fullname' | translate }}</label>
     <input 
       pInputText
-      i18nextValidationMessage
       id="signup-fullname" 
       type="text" 
       formControlName="fullname"
       placeholder="e.g. Jane Doe" 
       class="input" 
-      autocomplete="fullname" 
-    />
+      autocomplete="fullname" />
+
+    @if (form.get('fullname')?.invalid && (form.get('fullname')?.dirty || form.get('fullname')?.touched)) {
+      @if (form.get('fullname')?.hasError('required')) {
+        <small class="validation-error">{{ 'validation.fullname.required' | translate }}</small>
+      }
+      @if (form.get('fullname')?.hasError('minlength')) {
+        <small class="validation-error">{{ 'validation.fullname.minlength' | translate }}</small>
+      }
+      @if (form.get('fullname')?.hasError('maxlength')) {
+        <small class="validation-error">{{ 'validation.fullname.maxlength' | translate }}</small>
+      }
+    }
   </div>
 
   <div class="group">
-    <label class="label" for="signup-password">{{ 'password' | i18next }}</label>
+    <label class="label" for="signup-password">{{ 'app.password' | translate }}</label>
     <p-password 
       inputId="signup-password" 
-      i18nextValidationMessage
       formControlName="password"
       [toggleMask]="true" 
       [feedback]="false"
       placeholder="At least 6 characters"
       class="input"
       inputStyleClass="input"
-      autocomplete="new-password" 
-    />
+      autocomplete="new-password" />
+
+    @if (form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+      @if (form.get('password')?.hasError('required')) {
+        <small class="validation-error">{{ 'validation.password.required' | translate }}</small>
+      }
+      @if (form.get('password')?.hasError('minlength')) {
+        <small class="validation-error">{{ 'validation.password.minlength' | translate }}</small>
+      }
+    }
   </div>
 
   <p-button 
     type="submit" 
-    label="{{ 'create_account' | i18next }}" 
+    label="{{ 'app.create_account' | translate }}" 
     icon="pi pi-user-plus" 
     iconPos="right"
     [disabled]="isLoading()" 
@@ -67,7 +91,7 @@
 
   <div class="divider">
     <div class="divider-content">
-      <span class="divider-text">{{ 'or_continue_with' | i18next }}</span>
+      <span class="divider-text">{{ 'app.or_continue_with' | translate }}</span>
     </div>
   </div>
 
@@ -76,8 +100,8 @@
 </form>
 
 <div class="signup-footer">
-  {{ 'have_account' | i18next }}
+  {{ 'app.have_account' | translate }}
   <a routerLink="/auth/login" class="link">
-    {{ 'sign_in' | i18next }}
+    {{ 'app.sign_in' | translate }}
   </a>
 </div>

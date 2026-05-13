@@ -11,25 +11,25 @@
 
     <p class="join-room-info">
       @if (isPasswordRoom) {
-        {{ 'room_password_protected' | i18next }}
+        {{ 'app.room_password_protected' | translate }}
       } @else {
-        {{ 'room_public' | i18next }}
+        {{ 'app.room_public' | translate }}
       }
       @if (memberCount > 0) {
-        &nbsp;{{ memberCount }} {{ memberCount === 1 ? ('member' | i18next) : ('members_word' | i18next) }}.
+        &nbsp;{{ memberCount }} {{ memberCount === 1 ? ('app.member' | translate) : ('app.members_word' | translate) }}.
       }
     </p>
 
     @if (isPasswordRoom) {
       <form [formGroup]="form" class="join-room-form">
-        <label class="join-room-label">{{ 'password' | i18next }}</label>
+        <label class="join-room-label">{{ 'app.password' | translate }}</label>
         <p-password
           formControlName="password"
           [feedback]="false"
           [toggleMask]="true"
           class="join-room-input"
           inputStyleClass="join-room-input"
-          [placeholder]="'enter_room_password' | i18next"
+          [placeholder]="'app.enter_room_password' | translate"
           (keydown.enter)="submit()" />
       </form>
     }
@@ -43,12 +43,12 @@
   <ng-template pTemplate="footer">
     <div class="join-room-footer">
       <p-button
-        [label]="'cancel' | i18next"
+        [label]="'app.cancel' | translate"
         severity="secondary"
         [disabled]="isLoading()"
         (onClick)="close()" />
       <p-button
-        [label]="'join' | i18next"
+        [label]="'app.join' | translate"
         [loading]="isLoading()"
         [disabled]="!canSubmit"
         (onClick)="submit()" />

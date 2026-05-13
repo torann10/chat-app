@@ -3,7 +3,7 @@ import { Component, input, output, viewChild } from '@angular/core';
 import { Message } from '../../../../../shared';
 import { ScrollerLazyLoadEvent, Scroller, ScrollerModule } from 'primeng/scroller';
 import { MessageItem } from '../message-item/message-item.component';
-import { I18NextPipe } from 'angular-i18next';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-message-list',
@@ -11,7 +11,7 @@ import { I18NextPipe } from 'angular-i18next';
     CommonModule, 
     ScrollerModule, 
     MessageItem,
-    I18NextPipe
+    TranslatePipe
   ],
   templateUrl: './message-list.component.html',
   styleUrl: './message-list.component.scss',

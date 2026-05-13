@@ -1,15 +1,15 @@
 import { Component, input, output } from '@angular/core';
-import { I18NextPipe } from 'angular-i18next';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { Room } from '../../../../../shared';
 import { AvatarModule } from 'primeng/avatar';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chat-header',
   imports: [
     ButtonModule,
-    I18NextPipe,
+    TranslatePipe,
     TooltipModule,
     AvatarModule
   ],

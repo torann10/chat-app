@@ -9,7 +9,7 @@
 
       @if (view() === 'list') {
         <div class="header-group">
-          <span class="title">{{ 'members' | i18next }}</span>
+          <span class="title">{{ 'app.members' | translate }}</span>
           @if (!isLoading()) {
             <span class="count">({{ members().length }})</span>
           }
@@ -22,7 +22,7 @@
               [rounded]="true"
               severity="secondary"
               size="small"
-              [pTooltip]="'add_member' | i18next"
+              [pTooltip]="'app.add_member' | translate"
               tooltipPosition="bottom"
               (onClick)="showAddView()" />
           }
@@ -43,7 +43,7 @@
             severity="secondary"
             size="small"
             (onClick)="view.set('list')" />
-          <span class="title">{{ 'add_member_title' | i18next }}</span>
+          <span class="title">{{ 'app.add_member_title' | translate }}</span>
         </div>
         <p-button
           icon="pi pi-times"
@@ -86,7 +86,7 @@
                   {{ member.user.fullname || member.user.email }}
                 </span>
                 @if (member.user.id === currentUserId()) {
-                  <span class="you-badge">{{ 'you' | i18next }}</span>
+                  <span class="you-badge">{{ 'app.you' | translate }}</span>
                 }
               </div>
               @if (member.user.fullname) {
@@ -95,7 +95,7 @@
             </div>
 
             <p-tag
-              [value]="(member.role === 'admin' ? 'role_admin' : 'role_member') | i18next"
+              [value]="(member.role === 'admin' ? 'app.role_admin' : 'app.role_member') | translate"
               [severity]="member.role === 'admin' ? 'warn' : 'secondary'"
               class="role-tag" />
 
@@ -103,7 +103,7 @@
               <div class="item-actions">
                 <p-button
                   [icon]="member.role === 'admin' ? 'pi pi-arrow-down-right' : 'pi pi-arrow-up-right'"
-                  [pTooltip]="(member.role === 'admin' ? 'demote_to_member' : 'promote_to_admin') | i18next"
+                  [pTooltip]="(member.role === 'admin' ? 'app.demote_to_member' : 'app.promote_to_admin') | translate"
                   tooltipPosition="bottom"
                   [text]="true"
                   [rounded]="true"
@@ -113,7 +113,7 @@
                   (onClick)="toggleRole(member)" />
                 <p-button
                   icon="pi pi-trash"
-                  [pTooltip]="'remove_from_room' | i18next"
+                  [pTooltip]="'app.remove_from_room' | translate"
                   tooltipPosition="bottom"
                   [text]="true"
                   [rounded]="true"
@@ -130,7 +130,7 @@
         @if (room()?.type !== 'dm') {
           <div class="footer">
             <p-button
-              [label]="'leave_room' | i18next"
+              [label]="'app.leave_room' | translate"
               icon="pi pi-sign-out"
               severity="danger"
               [outlined]="true"

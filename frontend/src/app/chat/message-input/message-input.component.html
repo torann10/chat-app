@@ -6,7 +6,7 @@
       class="field"
       [style.box-shadow]="'none'"
       [(ngModel)]="messageText"
-      placeholder="{{ 'type_message' | i18next }}"
+      placeholder="{{ 'app.type_message' | translate }}"
       (keydown.enter)="submit()"
       autocomplete="off"
     />
@@ -19,7 +19,7 @@
       size="small"
       [disabled]="!messageText().trim()"
       (onClick)="submit()"
-      title="{{ 'send' | i18next }}"
+      title="{{ 'app.send' | translate }}"
     />
   </div>
 </div>

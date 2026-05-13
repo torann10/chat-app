@@ -1,6 +1,6 @@
 import { Component, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { I18NextPipe } from 'angular-i18next';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
@@ -10,7 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule, 
     InputTextModule, 
     FormsModule,
-    I18NextPipe
+    TranslatePipe
   ],
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.scss',

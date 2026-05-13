@@ -1,14 +1,14 @@
 import { Component, input, model, output, viewChild, ViewEncapsulation } from '@angular/core';
-import { I18NextPipe } from 'angular-i18next';
 import { DialogModule} from 'primeng/dialog';
 import { UserPickerComponent } from '../user-picker/user-picker.component';
 import { User } from 'shared';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-dm-dialog',
   imports: [
     DialogModule,
-    I18NextPipe,
+    TranslatePipe,
     UserPickerComponent
   ],
   templateUrl: './create-dm-dialog.component.html',

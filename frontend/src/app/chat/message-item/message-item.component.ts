@@ -1,6 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Message } from 'shared';
-import { I18NextPipe } from 'angular-i18next';
 import { DatePipe } from '@angular/common';
 import { AvatarModule } from "primeng/avatar";
 import { AuthService } from '../../auth/auth.service';

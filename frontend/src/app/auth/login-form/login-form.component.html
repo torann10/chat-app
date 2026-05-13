@@ -1,42 +1,64 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="login-form">
 
   <div class="header">
-    <h2 class="title">{{ 'welcome_back' | i18next }}</h2>
-    <p class="subtitle">{{ 'enter_credentials' | i18next}}</p>
+    <h2 class="title">{{ 'app.welcome_back' | translate }}</h2>
+    <p class="subtitle">{{ 'app.enter_credentials' | translate }}</p>
   </div>
 
   @if (error(); as err) {
     <div class="error">
       <i class="pi pi-exclamation-circle error-icon"></i>
-      <span>{{ err | i18next }}</span>
+      <span>{{ err | translate}}</span>
     </div>
   }
 
   <div class="group">
-    <label class="label" for="login-email">{{ 'email' | i18next }}</label>
-    <input i18nextValidationMessage pInputText id="login-email" type="email" formControlName="email"
-           placeholder="you@example.com" class="input" autocomplete="email" />
+    <label class="label" for="login-email">{{ 'app.email' | translate }}</label>
+    <input 
+      pInputText 
+      id="login-email" 
+      type="email" 
+      formControlName="email"
+      placeholder="you@example.com" 
+      class="input" 
+      autocomplete="email" />
+
+    @if (form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) {
+      @if (form.get('email')?.hasError('required')) {
+        <small class="validation-error">{{ 'validation.email.required' | translate }}</small>
+      }
+      @if (form.get('email')?.hasError('email')) {
+        <small class="validation-error">{{ 'validation.email.email' | translate }}</small>
+      }
+    }
   </div>
 
   <div class="group">
     <div class="label-wrapper">
-      <label class="label" for="login-password">{{ 'password' | i18next }}</label>
+      <label class="label" for="login-password">{{ 'app.password' | translate }}</label>
     </div>
     <p-password 
-      i18nextValidationMessage 
       inputId="login-password" 
       formControlName="password"
       [toggleMask]="true" 
       [feedback]="false" 
       placeholder="••••••••" 
       inputStyleClass="input" 
-      autocomplete="current-password" 
-    />
+      autocomplete="current-password" />
+
+    @if (form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)) {
+      @if (form.get('password')?.hasError('required')) {
+        <small class="validation-error">{{ 'validation.password.required' | translate }}</small>
+      }
+      @if (form.get('password')?.hasError('minlength')) {
+        <small class="validation-error">{{ 'validation.password.minlength' | translate }}</small>
+      }
+    }
   </div>
 
   <p-button 
     type="submit" 
-    label="{{ 'sign_in' | i18next }}" 
+    label="{{ 'app.sign_in' | translate }}" 
     icon="pi pi-sign-in" 
     iconPos="right"
     [disabled]="isLoading()" 
@@ -46,7 +68,7 @@
 
   <div class="divider">
     <div class="divider-content">
-      <span class="divider-text">{{ 'or_continue_with' | i18next }}</span>
+      <span class="divider-text">{{ 'app.or_continue_with' | translate }}</span>
     </div>
   </div>
 
@@ -55,8 +77,8 @@
 </form>
 
 <div class="login-footer">
-  {{ 'no_account' | i18next }}
+  {{ 'app.no_account' | translate }}
   <a routerLink="/auth/signup" class="link">
-    {{ 'sign_up' | i18next }}
+    {{ 'app.sign_up' | translate }}
   </a>
 </div>

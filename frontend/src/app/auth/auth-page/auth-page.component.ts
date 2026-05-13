@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { I18NextPipe } from 'angular-i18next';
+import { TranslatePipe } from '@ngx-translate/core';
  
 @Component({
   selector: 'app-auth-page',
   imports: [
     RouterOutlet,
-    I18NextPipe
+    TranslatePipe
   ],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss',

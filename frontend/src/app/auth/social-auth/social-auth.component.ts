@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { I18NextPipe } from 'angular-i18next';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-social-auth',
-  imports: [I18NextPipe],
+  imports: [TranslatePipe],
   templateUrl: './social-auth.component.html',
   styleUrl: './social-auth.component.scss',
 })
