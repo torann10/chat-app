@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { Room } from 'shared';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
@@ -21,7 +21,8 @@ import { SidebarUserMenuComponent } from "./sidebar-user-menu/sidebar-user-menu.
     SidebarUserMenuComponent
 ],
   templateUrl: './chat-sidebar.component.html',
-  host: { class: 'flex flex-col h-full' },
+  styleUrl: './chat-sidebar.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ChatSidebarComponent {
   rooms = input.required<Room[]>();

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ViewEncapsulation } from '@angular/core';
 import { AvatarModule } from "primeng/avatar";
 import { ButtonModule } from "primeng/button";
 import { MenuModule } from "primeng/menu";
@@ -18,6 +18,7 @@ import { MenuItem } from 'primeng/api';
     I18NextPipe
   ],
   templateUrl: './sidebar-user-menu.component.html',
+  styleUrl: './sidebar-user-menu.component.scss',
 })
 export class SidebarUserMenuComponent {
   private authService = inject(AuthService);
@@ -54,7 +55,7 @@ export class SidebarUserMenuComponent {
         {
           label: this.i18n.t('log_out'),
           icon: 'pi pi-sign-out',
-          styleClass: '[&_*]:!text-red-500',
+          styleClass: 'log-out',
           command: () => this.authService.logout(),
         },
       ],

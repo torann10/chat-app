@@ -1,0 +1,36 @@
+@use '../../../styles.scss';
+
+.message-input {
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    box-shadow: inset 0 0 0 1px styles.$color-border; 
+    transition: box-shadow 0.15s ease-in-out;
+
+    &:focus-within {
+      box-shadow: inset 0 0 0 1px styles.$color-primary-500, 
+                  0 0 0 3px color-mix(in srgb, styles.$color-primary-500 50%, transparent);
+    }
+  }
+
+  .field {
+    flex: 1 1 0%;
+    background-color: transparent;
+    font-size: 0.875rem;
+    outline: none;
+    border: none;
+    box-shadow: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      background-color: transparent;
+    }
+  }
+}

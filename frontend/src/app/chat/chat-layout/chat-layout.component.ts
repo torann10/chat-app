@@ -1,14 +1,14 @@
-import { Component, computed, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, signal, viewChild } from '@angular/core';
 import { MessageInputComponent } from '../message-input/message-input.component';
 import { MessageListComponent } from '../message-list/message-list.component';
 import { ChatHeaderComponent } from '../chat-header/chat-header.component';
-import { CreateRoomBody, Message, Room, User } from 'shared';
 import { ChatSidebarComponent } from '../chat-sidebar/chat-sidebar.component';
 import { ChatService } from '../chat.service';
 import { CreateRoomDialogComponent } from "../create-room-dialog/create-room-dialog.component";
 import { CreateDmDialogComponent } from "../create-dm-dialog/create-dm-dialog.component";
 import { JoinRoomDialogComponent } from "../join-room-dialog/join-room-dialog.component";
 import { RoomMembersComponent } from "../room-members/room-members.component";
+import { CreateRoomBody, Room, User } from 'shared';
 
 @Component({
   selector: 'app-chat-layout',
@@ -23,6 +23,7 @@ import { RoomMembersComponent } from "../room-members/room-members.component";
     RoomMembersComponent
 ],
   templateUrl: './chat-layout.component.html',
+  styleUrl: './chat-layout.component.scss',
 })
 export class ChatLayoutComponent {
   protected readonly sidebarOpen = signal(false);

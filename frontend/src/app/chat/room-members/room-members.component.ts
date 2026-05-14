@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, model, signal, viewChild } from '@angular/core';
+import { Component, computed, effect, inject, input, model, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../../api/api.service';
 import { ChatService } from '../chat.service';
 import { Role, Room, RoomMember, User } from 'shared';
@@ -30,6 +30,8 @@ const AVATAR_COLORS = [
     DrawerModule
 ],
   templateUrl: './room-members.component.html',
+  styleUrl: './room-members.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class RoomMembersComponent {
   visible = model(false);

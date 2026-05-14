@@ -1,0 +1,48 @@
+@use '../../../../styles.scss'; 
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+
+  .avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .info {
+    min-width: 0;
+    flex: 1 1 0%;
+  }
+
+  .name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .status {
+    display: none;
+
+    @media (min-width: styles.$bp-sm) {
+      display: flex;
+    }
+    
+    align-items: center;
+    gap: 0.375rem;
+    flex-shrink: 0;
+  }
+
+  .status-indicator {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    background-color: styles.$color-green-500;
+  }
+
+  .status-text {
+    font-size: 0.75rem;
+  }
+}

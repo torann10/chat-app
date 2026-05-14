@@ -1,0 +1,154 @@
+@use '../../../styles.scss'; 
+
+app-chat-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+  flex-shrink: 0;
+  gap: 0.625rem;
+  border-bottom: 1px solid styles.$color-border;
+  padding: 0 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.75rem;
+  width: 1.75rem;
+  border-radius: 0.5rem;
+  background-color: styles.$color-primary-600;
+}
+
+.logo-icon {
+  font-size: 0.875rem;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.content {
+  flex: 1 1 0%;
+  overflow-y: auto;
+  
+  & > * + * {
+    margin-top: 1.25rem;
+  }
+}
+
+.menu {
+  width: 100%;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+.submenu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.75rem;
+}
+
+.submenu-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: styles.$color-muted;
+}
+
+.submenu-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 0.25rem;
+  border: none;
+  background: transparent;
+  color: styles.$color-muted;
+  transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: styles.$color-canvas-hover;
+    color: inherit;
+  }
+}
+
+.submenu-action-icon {
+  font-size: 0.75rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: styles.$color-canvas-hover;
+  }
+
+  &-active {
+    background-color: styles.$color-highlight-bg;
+    color: styles.$color-highlight;
+
+    &:hover {
+      background-color: styles.$color-highlight-bg; 
+    }
+  }
+
+  &-muted {
+    color: styles.$color-muted;
+  }
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item-icon {
+  font-size: 0.875rem;
+  width: 1rem;
+  text-align: center;
+}
+
+.item-label {
+  font-weight: normal;
+
+  &-bold {
+    font-weight: 500;
+  }
+}
+
+.status-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  background-color: styles.$color-surface-400;
+
+  &-online {
+    background-color: styles.$color-green-500;
+  }
+}
+
+.footer {
+  flex-shrink: 0;
+  border-top: 1px solid styles.$color-border;
+  padding: 0.625rem 0.75rem;
+}

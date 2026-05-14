@@ -1,44 +1,42 @@
-<div class="flex h-14 shrink-0 items-center gap-2.5 border-b border-border px-4">
-  <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-primary-600">
-    <i class="pi pi-comments text-sm"></i>
+<div class="sidebar-header">
+  <div class="logo">
+    <i class="pi pi-comments logo-icon"></i>
   </div>
-  <span class="font-semibold">{{ 'title' | i18next }}</span>
+  <span class="title">{{ 'title' | i18next }}</span>
 </div>
 
-<div class="flex-1 overflow-y-auto space-y-5">
-  <p-menu [model]="menuItems()" styleClass="w-full !border-none !bg-transparent p-0">
+<div class="content">
+  <p-menu [model]="menuItems()" styleClass="menu">
 
     <ng-template pTemplate="submenuheader" let-item>
-      <div class="flex items-center justify-between px-3 py-1">
-        <span class="text-xs font-semibold uppercase tracking-wider text-muted">
+      <div class="submenu-header">
+        <span class="submenu-title">
           {{ item.label | i18next }}
         </span>
         @if (item.data?.['addAction']) {
           <button
             type="button"
-            class="flex h-5 w-5 items-center justify-center rounded transition-colors hover:bg-canvas-hover text-muted hover:text-default"
+            class="submenu-action"
             [title]="(item.data['addAction'] === 'room' ? 'create_room_tooltip' : 'new_dm_tooltip') | i18next"
             (click)="onAddClick(item.data['addAction'], $event)">
-            <i class="pi pi-plus text-xs"></i>
+            <i class="pi pi-plus submenu-action-icon"></i>
           </button>
         }
       </div>
     </ng-template>
 
     <ng-template pTemplate="item" let-item>
-      <div class="cursor-pointer flex items-center justify-between px-3 py-2 rounded-lg transition-colors hover:bg-canvas-hover"
-          [class.bg-highlight-bg]="item.id == activeRoomId()"
-          [class.text-highlight]="item.id == activeRoomId()"
-          [class.text-muted]="item.icon && !item.data?.['isMember'] && item.id != activeRoomId()">
-        <div class="flex items-center gap-2">
+      <div class="item"
+          [class.item-active]="item.id == activeRoomId()"
+          [class.item-active]="item.id == activeRoomId()"
+          [class.item-muted]="item.icon && !item.data?.['isMember'] && item.id != activeRoomId()">
+        <div class="item-content">
           @if (item.icon) {
-            <i [class]="item.icon" class="text-sm w-4 text-center"></i>
+            <i [class]="item.icon" class="item-icon"></i>
           } @else {
-            <div class="w-2 h-2 rounded-full shrink-0"
-                 [class.bg-green-500]="item.state?.['isOnline']"
-                 [class.bg-surface-400]="!item.state?.['isOnline']"></div>
+            <div class="status-indicator" [class.status-indicator-online]="item.state?.['isOnline']"></div>
           }
-          <span [class.font-medium]="item.data?.['isMember'] || !item.icon">{{ item.label }}</span>
+          <span class="item-label" [class.item-label-bold]="item.data?.['isMember'] || !item.icon">{{ item.label }}</span>
         </div>
         
         @if (item.badge) {
@@ -49,6 +47,6 @@
   </p-menu>
 </div>
 
-<div class="shrink-0 border-t border-border px-3 py-2.5">
+<div class="footer">
   <app-sidebar-user-menu />
 </div>

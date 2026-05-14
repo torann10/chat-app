@@ -1,0 +1,130 @@
+@use '../../../styles.scss'; 
+
+.members-drawer {
+  width: 20rem !important;
+
+  .header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-group {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+
+    &-tight {
+      gap: 0.25rem;
+    }
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .count {
+    font-size: 0.875rem;
+    color: styles.$color-muted;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 0.25rem;
+  }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .skeleton-text {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .avatar {
+    flex-shrink: 0;
+
+    &-text-sm {
+      .p-avatar-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .info {
+    min-width: 0;
+    flex: 1 1 0%;
+  }
+
+  .name-group {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+  }
+
+  .name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .you-badge {
+    font-size: 0.75rem;
+    color: styles.$color-muted;
+  }
+
+  .email {
+    font-size: 0.75rem;
+    color: styles.$color-muted;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .role-tag {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+  }
+
+  .item-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.125rem;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  .footer {
+    margin-top: 0.75rem;
+    border-top: 1px solid styles.$color-border;
+    padding-top: 0.75rem;
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+
+  .add-view {
+    padding-top: 0.25rem;
+  }
+}

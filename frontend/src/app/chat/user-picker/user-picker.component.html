@@ -1,60 +1,59 @@
-<div class="flex flex-col gap-3">
+<div class="user-picker">
 
-  <p-iconfield class="w-full">
+  <p-iconfield class="search">
     <p-inputicon class="pi pi-search" />
     <input
       pInputText
       [formControl]="searchControl"
       [placeholder]="'search_people' | i18next"
-      class="w-full"
+      class="input"
       autocomplete="off" />
   </p-iconfield>
 
-  <div class="max-h-72 overflow-y-auto -mx-1 px-1">
+  <div class="list">
 
     @if (isLoading()) {
       @for (row of skeletonRows; track $index) {
-        <div class="flex items-center gap-3 rounded-lg px-2 py-2.5">
-          <p-skeleton shape="circle" size="2.25rem" class="shrink-0" />
-          <div class="flex flex-1 flex-col gap-2">
+        <div class="skeleton-item">
+          <p-skeleton shape="circle" size="2.25rem"/>
+          <div class="skeleton-info">
             <p-skeleton height="0.75rem" width="55%" />
             <p-skeleton height="0.625rem" width="40%" />
           </div>
         </div>
       }
     } @else if (users().length === 0) {
-      <div class="flex flex-col items-center justify-center py-8 text-muted">
-        <i class="pi pi-users mb-2 text-2xl opacity-40"></i>
-        <p class="text-sm">{{ 'no_users_found' | i18next }}</p>
+      <div class="empty">
+        <i class="pi pi-users empty-icon"></i>
+        <p class="empty-text">{{ 'no_users_found' | i18next }}</p>
       </div>
     } @else {
       @for (user of users(); track user.id) {
         <button
           type="button"
-          class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-canvas-hover"
+          class="item"
           (click)="select(user)">
 
           <p-avatar
             [label]="initials(user)"
             shape="circle"
             [style]="avatarStyle(user.id)"
-            class="shrink-0 !text-xs !font-semibold"
+            class="avatar-text-sm"
             size="normal" />
 
-          <div class="min-w-0 flex-1">
-            <div class="flex items-center gap-2">
-              <span class="truncate text-sm font-medium">
+          <div class="info">
+            <div class="name-row">
+              <span class="name">
                 {{ user.fullname || user.email }}
               </span>
               <span
-                class="inline-block h-1.5 w-1.5 shrink-0 rounded-full"
-                [class.bg-green-500]="user.isOnline"
-                [class.bg-surface-400]="!user.isOnline"
+                class="status"
+                [class.status-online]="user.isOnline"
                 [title]="user.isOnline ? 'online' : 'offline' | i18nextCap">
               </span>
             </div>
             @if (user.fullname) {
-              <p class="truncate text-xs text-muted">{{ user.email }}</p>
+              <p class="email">{{ user.email }}</p>
             }
           </div>
 

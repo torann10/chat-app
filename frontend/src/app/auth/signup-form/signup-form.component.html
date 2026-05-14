@@ -1,19 +1,19 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-5">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="signup-form">
 
-  <div class="space-y-1">
-    <h2 class="text-xl font-bold">{{ 'create_an_account' | i18next }}</h2>
-    <p class="text-sm">{{ 'fill_details' | i18next }}</p>
+  <div class="header">
+    <h2 class="title">{{ 'create_an_account' | i18next }}</h2>
+    <p class="subtitle">{{ 'fill_details' | i18next }}</p>
   </div>
 
   @if (error(); as err) {
-    <div class="flex items-start gap-2 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">
-      <i class="pi pi-exclamation-circle mt-0.5 shrink-0"></i>
+    <div class="error">
+      <i class="pi pi-exclamation-circle error-icon"></i>
       <span>{{ err | i18next }}</span>
     </div>
   }
 
-  <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium" for="signup-email">{{ 'email' | i18next }}</label>
+  <div class="group">
+    <label class="label" for="signup-email">{{ 'email' | i18next }}</label>
     <input 
       pInputText
       i18nextValidationMessage 
@@ -21,13 +21,13 @@
       type="email" 
       formControlName="email"
       placeholder="you@example.com" 
-      class="w-full" 
+      class="input" 
       autocomplete="email" 
     />
   </div>
 
-  <div class="flex flex-col gap-1.5 w-full min-w-0">
-    <label class="text-sm font-medium" for="signup-fullname">{{ 'fullname' | i18next }}</label>
+  <div class="group">
+    <label class="label" for="signup-fullname">{{ 'fullname' | i18next }}</label>
     <input 
       pInputText
       i18nextValidationMessage
@@ -35,13 +35,13 @@
       type="text" 
       formControlName="fullname"
       placeholder="e.g. Jane Doe" 
-      class="w-full" 
+      class="input" 
       autocomplete="fullname" 
     />
   </div>
 
-  <div class="flex flex-col gap-1.5">
-    <label class="text-sm font-medium" for="signup-password">{{ 'password' | i18next }}</label>
+  <div class="group">
+    <label class="label" for="signup-password">{{ 'password' | i18next }}</label>
     <p-password 
       inputId="signup-password" 
       i18nextValidationMessage
@@ -49,8 +49,8 @@
       [toggleMask]="true" 
       [feedback]="false"
       placeholder="At least 6 characters"
-      class="w-full"
-      inputStyleClass="w-full"
+      class="input"
+      inputStyleClass="input"
       autocomplete="new-password" 
     />
   </div>
@@ -62,12 +62,12 @@
     iconPos="right"
     [disabled]="isLoading()" 
     [loading]="isLoading()" 
-    styleClass="w-full" 
+    styleClass="button" 
   />
 
-  <div class="relative my-2">
-    <div class="relative flex justify-center">
-      <span class="px-3 text-xs">{{ 'or_continue_with' | i18next }}</span>
+  <div class="divider">
+    <div class="divider-content">
+      <span class="divider-text">{{ 'or_continue_with' | i18next }}</span>
     </div>
   </div>
 
@@ -75,9 +75,9 @@
 
 </form>
 
-<div class="mt-6 text-center text-sm">
+<div class="signup-footer">
   {{ 'have_account' | i18next }}
-  <a routerLink="/auth/login" class="font-medium hover:underline">
+  <a routerLink="/auth/login" class="link">
     {{ 'sign_in' | i18next }}
   </a>
 </div>

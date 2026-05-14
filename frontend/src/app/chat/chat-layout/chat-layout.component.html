@@ -1,15 +1,15 @@
-<div class="flex h-dvh overflow-hidden font-sans">
+<div class="chat-layout">
 
   @if (sidebarOpen()) {
     <div
-      class="fixed inset-0 z-20 bg-surface-950/60 md:hidden"
+      class="backdrop"
       (click)="closeSidebar()"
     ></div>
   }
 
   <aside
-    class="fixed inset-y-0 left-0 z-30 flex h-full w-72 flex-col border-r border-border bg-sidebar transition-transform duration-300 ease-in-out md:relative md:z-auto md:translate-x-0"
-    [class.-translate-x-full]="!sidebarOpen()"
+    class="sidebar"
+    [class.sidebar-closed]="!sidebarOpen()"
   >
     <app-chat-sidebar
       [rooms]="channels()"
@@ -21,7 +21,7 @@
     />
   </aside>
 
-  <div class="flex flex-1 flex-col min-w-0">
+  <div class="main">
     <app-chat-header
       [room]="activeRoom()"
       [activeUsersCount]="activeUsersCount()"
@@ -29,7 +29,7 @@
       (openMembers)="showMembers.set(true)"
     />
     <app-message-list
-      class="flex-1 min-h-0 block"
+      class="message-list"
       [messages]="messages()"
       [isLoadingTop]="isLoading()"
       [isLoadingBottom]="isLoadingOlderMessages()"

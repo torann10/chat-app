@@ -14,6 +14,7 @@ import { I18NextPipe } from 'angular-i18next';
     I18NextPipe
   ],
   templateUrl: './message-list.component.html',
+  styleUrl: './message-list.component.scss',
 })
 export class MessageListComponent {
   messages = input.required<Message[]>();

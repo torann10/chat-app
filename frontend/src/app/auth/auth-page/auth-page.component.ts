@@ -9,6 +9,7 @@ import { I18NextPipe } from 'angular-i18next';
     I18NextPipe
   ],
   templateUrl: './auth-page.component.html',
+  styleUrl: './auth-page.component.scss',
 })
 export class AuthPageComponent {
   readonly year = new Date().getFullYear();

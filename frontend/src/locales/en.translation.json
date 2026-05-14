@@ -22,6 +22,7 @@
   "toggle_sidebar": "Toggle sidebar",
   "members": "Members",
   "online": "online",
+  "members_online": "{{count}} online",
   "offline": "offline",
   "loading": "Loading...",
   "loading_messages": "Loading messages...",

@@ -1,9 +1,10 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { CreateRoomBody, Message, Room, User } from 'shared';
+import { computed, effect, inject, Injectable, Signal, signal } from '@angular/core';
+import { CreateRoomBody, Message, Room, RoomMember, User } from 'shared';
 import { SocketService } from '../socket/socket.service';
 import { ApiService } from '../api/api.service';
 import { AuthService } from '../auth/auth.service';
-import { tap } from 'rxjs';
+import { of, switchMap, tap } from 'rxjs';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,13 @@ export class ChatService {
   readonly messages = signal<Message[]>([]);
   readonly isLoadingMessages = signal(false);
   readonly isLoadingOlderMessages = signal(false);
-  readonly activeUsersCount = signal(0);
+  readonly roomMembers = signal<RoomMember[]>([]);
+
+  readonly activeUsersCount = computed(() => {
+    const members = this.roomMembers();
+    
+    return members.filter(member => member.user.isOnline === true).length;
+  });
 
   private readonly nextCursor = signal<number | null>(null);
   readonly hasMoreMessages = computed(() => this.nextCursor() !== null);
@@ -74,6 +81,14 @@ export class ChatService {
             : dm
         )
       );
+
+      this.roomMembers.update((members) => 
+        members.map((member) => 
+          member.user.id === userId 
+            ? { ...member, user: { ...member.user, isOnline } }
+            : member
+        )
+      );
     });
 
     effect(() => {
@@ -93,7 +108,10 @@ export class ChatService {
 
     effect(() => {
       const roomId = this.activeRoomId();
-      if (roomId !== null) this.loadMessages(roomId);
+      if (roomId !== null) {
+        this.loadMessages(roomId);
+        this.loadRoomMembers(roomId);
+      }
     });
   }
 
@@ -239,6 +257,15 @@ export class ChatService {
         console.error('[Chat] Failed to load messages:', err);
         this.isLoadingMessages.set(false);
       },
+    });
+  }
+
+  private loadRoomMembers(roomId: number): void {
+    this.apiService.getMembers(roomId).subscribe({
+      next: (members) => {
+        this.roomMembers.set(members); 
+      },
+      error: (err) => console.error('[Chat] Failed to load members:', err),
     });
   }
 

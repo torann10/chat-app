@@ -1,4 +1,4 @@
-import { Component, inject, input, model, output, signal } from '@angular/core';
+import { Component, inject, input, model, output, signal, ViewEncapsulation } from '@angular/core';
 import { DialogModule } from "primeng/dialog";
 import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
@@ -17,6 +17,8 @@ import { I18NextPipe } from 'angular-i18next';
     ButtonModule
   ],
   templateUrl: './join-room-dialog.component.html',
+  styleUrl: './join-room-dialog.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class JoinRoomDialogComponent {
   room = input<Room | null>(null);

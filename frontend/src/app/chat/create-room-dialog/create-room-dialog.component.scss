@@ -1,0 +1,35 @@
+@use '../../../styles.scss'; 
+
+.room-dialog {
+  width: 480px;
+  max-width: 95vw;
+}
+
+.room-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .input {
+    width: 100%;
+  }
+}
+
+.room-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

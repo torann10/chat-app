@@ -14,6 +14,7 @@ import { AvatarModule } from 'primeng/avatar';
     AvatarModule
   ],
   templateUrl: './chat-header.component.html',
+  styleUrl: './chat-header.component.scss',
 })
 export class ChatHeaderComponent {
   room = input.required<Room | null>();
