@@ -1,15 +1,15 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Message } from 'shared';
-import { DatePipe } from '@angular/common';
 import { AvatarModule } from "primeng/avatar";
 import { AuthService } from '../../auth/auth.service';
+import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 
 
 @Component({
   selector: 'app-message-item',
   imports: [
-    DatePipe,
-    AvatarModule
+    AvatarModule,
+    TimeAgoPipe
 ],
   templateUrl: './message-item.component.html',
   styleUrl: './message-item.component.scss',

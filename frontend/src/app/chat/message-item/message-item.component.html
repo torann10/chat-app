@@ -19,7 +19,7 @@
           {{ message().senderId === currentUserId() ? '' : (message().sender.fullname ?? message().sender.email) }}
         </span>
         <span class="time">
-          {{ message().createdAt | date: 'HH:mm' }}
+          {{ message().createdAt | timeAgo }}
         </span>
       </div>
     }
@@ -34,7 +34,7 @@
     @if (!showSender()) {
       <div class="time-hover">
         <span class="time">
-          {{ message().createdAt | date: 'HH:mm' }}
+          {{ message().createdAt | timeAgo }}
         </span>
       </div>
     }
