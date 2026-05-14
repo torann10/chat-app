@@ -19,7 +19,7 @@
       id="signup-email" 
       type="email" 
       formControlName="email"
-      placeholder="you@example.com" 
+      placeholder="{{ 'app.email_placeholder' | translate }}" 
       class="input" 
       autocomplete="email" />
 
@@ -40,7 +40,7 @@
       id="signup-fullname" 
       type="text" 
       formControlName="fullname"
-      placeholder="e.g. Jane Doe" 
+      placeholder="{{ 'app.fullname_placeholder' | translate }}" 
       class="input" 
       autocomplete="fullname" />
 
@@ -64,7 +64,7 @@
       formControlName="password"
       [toggleMask]="true" 
       [feedback]="false"
-      placeholder="At least 6 characters"
+      placeholder="{{ 'app.signup_password_placeholder' | translate }}"
       class="input"
       inputStyleClass="input"
       autocomplete="new-password" />

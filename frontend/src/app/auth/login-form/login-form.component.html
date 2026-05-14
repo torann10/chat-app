@@ -19,7 +19,7 @@
       id="login-email" 
       type="email" 
       formControlName="email"
-      placeholder="you@example.com" 
+      placeholder="{{ 'app.email_placeholder' | translate }}" 
       class="input" 
       autocomplete="email" />
 
@@ -42,7 +42,7 @@
       formControlName="password"
       [toggleMask]="true" 
       [feedback]="false" 
-      placeholder="••••••••" 
+      placeholder="{{ 'app.login_password_placeholder' | translate }}" 
       inputStyleClass="input" 
       autocomplete="current-password" />
 
