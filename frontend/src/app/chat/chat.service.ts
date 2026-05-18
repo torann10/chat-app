@@ -1,10 +1,11 @@
-import { computed, effect, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { CreateRoomBody, Message, Room, RoomMember, User } from 'shared';
 import { SocketService } from '../socket/socket.service';
 import { ApiService } from '../api/api.service';
 import { AuthService } from '../auth/auth.service';
-import { of, switchMap, tap } from 'rxjs';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as StatsActions from './store/stats.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class ChatService {
   private socketService = inject(SocketService);
   private apiService = inject(ApiService);
   private authService = inject(AuthService);
+  private store = inject(Store);
 
   readonly channels = signal<Room[]>([]);
   readonly directMessages = signal<Room[]>([]);
@@ -226,6 +228,10 @@ export class ChatService {
     };
 
     this.messages.update((msgs) => [...msgs, optimistic]);
+
+    const recipientUser: User = room.otherUser!;
+
+    this.store.dispatch(StatsActions.messageSent({ recipient: recipientUser }));
 
     this.apiService.sendMessage(room.id, trimmed).subscribe({
       next: (confirmed) => {

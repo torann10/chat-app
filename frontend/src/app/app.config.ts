@@ -8,6 +8,11 @@ import Aura from '@primeuix/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { authInterceptor } from './auth/auth.interceptor';
+import { provideState, provideStore } from '@ngrx/store';
+import { statsReducer } from './chat/store/stats.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { StatsEffects } from './chat/store/stats.effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,8 +27,8 @@ export const appConfig: ApplicationConfig = {
       fallbackLang: 'en',
       loader: provideTranslateHttpLoader({
         prefix: '/i18n/',
-        suffix: '.json'
-      })
+        suffix: '.json',
+      }),
     }),
     provideAppInitializer(() => {
       const  translate = inject(TranslateService);
@@ -40,7 +45,11 @@ export const appConfig: ApplicationConfig = {
         options: {
           darkModeSelector: '.app-dark',
         },
-      }
+      },
     }),
+    provideStore(),
+    provideState({ name: 'stats', reducer: statsReducer }),
+    provideEffects([StatsEffects]),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

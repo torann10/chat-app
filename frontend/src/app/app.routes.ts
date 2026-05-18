@@ -4,6 +4,7 @@ import { authGuard } from './auth/auth.guard';
 import { AuthCallbackComponent } from './auth/auth-callback/auth-callback.component';
 import { ChatLayoutComponent } from './chat/chat-layout/chat-layout.component';
 import { noAuthGuard } from './auth/no-auth-guard';
+import { StatsComponent } from './chat/stats/stats.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -30,6 +31,9 @@ export const routes: Routes = [
     path: 'dashboard',
     component: ChatLayoutComponent,
     canActivate: [authGuard] 
+  },
+  {
+    path: 'stats', component: StatsComponent
   },
   { path: '**', redirectTo: '/dashboard' }
 ];

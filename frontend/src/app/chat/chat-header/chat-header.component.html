@@ -23,7 +23,7 @@
     @if (activeUsersCount() > 0) {
       <div class="online-status">
         <div class="status-indicator"></div>
-        <span class="status-text">{{ activeUsersCount() + 'app.online' | translate }} </span>
+        <span class="status-text">{{ 'app.members_online' | translate: {count: activeUsersCount()} }} </span>
       </div>
     }
   </div>

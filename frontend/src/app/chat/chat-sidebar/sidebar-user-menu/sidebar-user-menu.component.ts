@@ -64,6 +64,15 @@ export class SidebarUserMenuComponent {
           },
         ],
       },
+      {
+        items: [
+          {
+            label: this.translate.instant('app.stats'),
+            icon: 'pi pi-chart-bar',
+            routerLink: ['/stats']
+          }
+        ]
+      }
     ]
   });
 

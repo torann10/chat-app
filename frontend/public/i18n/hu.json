@@ -23,6 +23,7 @@
     "toggle_sidebar": "Oldalsáv ki/be",
     "members": "Tagok",
     "online": "elérhető",
+    "members_online": "{{count}} elérhető",
     "loading": "Betöltés...",
     "loading_messages": "Üzenetek betöltése...",
     "no_messages": "Még nincsenek üzenetek. Írjon valamit!",

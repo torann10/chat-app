@@ -1,0 +1,44 @@
+@use '../../../styles.scss'; 
+
+.stats-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 12px;
+    font-size: 1.5rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 14px 0;
+      border-bottom: 1px solid #edf2f7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      color: #4a5568;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      strong {
+        color: #1a202c;
+        font-weight: 600;
+      }
+    }
+  }
+}

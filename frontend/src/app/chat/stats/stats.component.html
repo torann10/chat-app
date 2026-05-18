@@ -1,0 +1,20 @@
+@if (!loading()) {
+  <div class="stats-container">
+    <h2>Your Usage Statistics</h2>
+    
+    <ul>
+      <li><strong>Messages Sent:</strong> {{ stats().messagesSent }}</li>
+      <li><strong>Rooms Opened:</strong> {{ stats().roomsOpened }}</li>
+      <li><strong>Favorite Person:</strong>
+        @if (favoritePerson(); as user) {
+          {{ user.fullname || user.email }}
+          <span class="status-dot" [class.online]="user.isOnline"></span>
+        } @else {
+          <span>None yet!</span>
+        }
+      </li>
+    </ul>
+  </div>
+} @else {
+  <p>Loading statistics...</p>
+}
