@@ -69,7 +69,13 @@
     "no_users_found": "Nem található felhasználó",
     "language": "Nyelv",
     "lang_en": "Angol",
-    "lang_hu": "Magyar"
+    "lang_hu": "Magyar",
+    "usage_stats": "Felhasználási statisztikáid",
+    "stats_messages_sent": "Elküldött üzenetek:",
+    "stats_rooms_opened": "Megnyitott szobák:",
+    "stats_favorite_person": "Kedvenc személy:",
+    "none_yet": "Még nincs!",
+    "loading_stats": "Statisztikák betöltése..."
   },
   "validation": {
     "email": {

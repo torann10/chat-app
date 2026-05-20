@@ -14,10 +14,6 @@ export const loadStatsFailure = createAction(
 
 export const messageSent = createAction(
   '[Chat] Message Sent',
-  props<{ recipient: User }>()
+  props<{ recipient: User | null }>()
 );
 export const incrementRoomsOpened = createAction('[Chat] Increment Rooms Opened');
-export const updateFavoritePerson = createAction(
-  '[Chat] Update Favorite Person',
-  props<{ personName: string }>()
-);

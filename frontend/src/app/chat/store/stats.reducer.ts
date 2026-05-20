@@ -29,21 +29,26 @@ export const statsReducer = createReducer(
     loading: false
   })),
   on(StatsActions.messageSent, (state, { recipient }) => {
-    const existingData = state.statistics.interactions[recipient.id];
-    const currentCount = existingData ? existingData.messageCount : 0;
+    const totalMessages = state.statistics.messagesSent + 1;
+
+    let updatedInteractions = { ...state.statistics.interactions };
+
+    if (recipient) {
+      const existingData = state.statistics.interactions[recipient!.id];
+      const currentCount = existingData ? existingData.messageCount : 0;
+
+      updatedInteractions[recipient.id] = {
+        user: recipient,
+        messageCount: currentCount + 1
+      };
+    }
 
     return {
       ...state,
       statistics: {
         ...state.statistics,
-        messagesSent: state.statistics.messagesSent + 1,
-        interactions: {
-          ...state.statistics.interactions,
-          [recipient.id]: {
-            user: recipient,
-            messageCount: currentCount + 1
-          }
-        }
+        messagesSent: totalMessages,
+        interactions: updatedInteractions
       }
     };
   }),
@@ -52,20 +57,6 @@ export const statsReducer = createReducer(
     statistics: {
       ...state.statistics,
       roomsOpened: state.statistics.roomsOpened + 1
-    }
-  })),
-  on(StatsActions.messageSent, (state) => ({
-    ...state,
-    statistics: {
-      ...state.statistics,
-      messagesSent: state.statistics.messagesSent + 1
-    }
-  })),
-  on(StatsActions.updateFavoritePerson, (state, { personName }) => ({
-    ...state,
-    statistics: {
-      ...state.statistics,
-      favoritePerson: personName
     }
   }))
 );

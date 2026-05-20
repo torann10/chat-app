@@ -1,11 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { CreateRoomBody, ListMessagesResponse, ListUsersResponse, Message, Room, RoomMember } from 'shared';
-import { UsageStatistics } from '../chat/store/stats.model';
-import { Store } from '@ngrx/store';
-import { selectUsageStatistics } from '../chat/store/stats.selectors';
-import * as StatsActions from '../chat/store/stats.actions';
 
 const BASE = 'http://localhost:3000';
 
@@ -14,16 +9,12 @@ const BASE = 'http://localhost:3000';
 })
 export class ApiService {
   private http = inject(HttpClient);
-  private store = inject(Store);
-  private statistics$: Observable<UsageStatistics> = this.store.select(selectUsageStatistics);
 
   getRooms(type: 'room' | 'dm') {
     return this.http.get<Room[]>(`${BASE}/rooms`, { params: { type } });
   }
 
   createRoom(body: CreateRoomBody) {
-    this.store.dispatch(StatsActions.incrementRoomsOpened());
-
     return this.http.post<Room>(`${BASE}/rooms`, body);
   }
 
@@ -71,9 +62,5 @@ export class ApiService {
 
   changeMemberRole(roomId: number, userId: number, role: 'admin' | 'member') {
     return this.http.patch<void>(`${BASE}/rooms/${roomId}/members/${userId}`, { role });
-  }
-
-  loadInitialStats(): void {
-    this.store.dispatch(StatsActions.loadStats());
   }
 }

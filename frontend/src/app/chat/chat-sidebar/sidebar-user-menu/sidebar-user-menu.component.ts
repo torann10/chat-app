@@ -63,15 +63,6 @@ export class SidebarUserMenuComponent {
             command: () => this.authService.logout(),
           },
         ],
-      },
-      {
-        items: [
-          {
-            label: this.translate.instant('app.stats'),
-            icon: 'pi pi-chart-bar',
-            routerLink: ['/stats']
-          }
-        ]
       }
     ]
   });

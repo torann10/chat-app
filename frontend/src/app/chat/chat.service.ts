@@ -143,6 +143,7 @@ export class ChatService {
   }
 
   selectRoom(roomId: number): void {
+    this.store.dispatch(StatsActions.incrementRoomsOpened());
     this.activeRoomId.set(roomId);
   }
 
@@ -229,7 +230,7 @@ export class ChatService {
 
     this.messages.update((msgs) => [...msgs, optimistic]);
 
-    const recipientUser: User = room.otherUser!;
+    const recipientUser: User | null = room.otherUser!;
 
     this.store.dispatch(StatsActions.messageSent({ recipient: recipientUser }));
 

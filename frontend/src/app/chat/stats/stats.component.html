@@ -1,20 +1,24 @@
-@if (!loading()) {
-  <div class="stats-container">
-    <h2>Your Usage Statistics</h2>
-    
-    <ul>
-      <li><strong>Messages Sent:</strong> {{ stats().messagesSent }}</li>
-      <li><strong>Rooms Opened:</strong> {{ stats().roomsOpened }}</li>
-      <li><strong>Favorite Person:</strong>
-        @if (favoritePerson(); as user) {
-          {{ user.fullname || user.email }}
-          <span class="status-dot" [class.online]="user.isOnline"></span>
-        } @else {
-          <span>None yet!</span>
-        }
-      </li>
-    </ul>
-  </div>
-} @else {
-  <p>Loading statistics...</p>
-}
+<p-accordion value="0">
+  <p-accordion-panel value="stats">
+    <p-accordion-header>{{ 'app.usage_stats' | translate }}</p-accordion-header>
+    <p-accordion-content>
+      @if (!loading()) {
+        <div class="stats-container">
+          <ul>
+            <li><strong>{{ 'app.stats_messages_sent' | translate }}</strong> {{ stats().messagesSent }}</li>
+            <li><strong>{{ 'app.stats_rooms_opened' | translate }}</strong> {{ stats().roomsOpened }}</li>
+            <li><strong>{{ 'app.stats_favorite_person' | translate }}</strong>
+              @if (favoritePerson(); as user) {
+                {{ user.fullname || user.email }}
+              } @else {
+                {{ 'app.none_yet' | translate }}
+              }
+            </li>
+          </ul>
+        </div>
+      } @else {
+        <p>{{ 'app.loading_stats' | translate }}</p>
+      }
+    </p-accordion-content>
+  </p-accordion-panel>
+</p-accordion>

@@ -147,6 +147,18 @@ app-chat-sidebar {
   }
 }
 
+.stats {
+
+  .p-accordionheader {
+    background: transparent;
+  }
+
+  .p-accordioncontent-content {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
 .footer {
   flex-shrink: 0;
   border-top: 1px solid styles.$color-border;

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output, ViewEncapsulation } from '@angular/core';
+import { Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { Room } from 'shared';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
@@ -8,6 +8,7 @@ import { PopoverModule } from 'primeng/popover';
 import { AvatarModule } from "primeng/avatar";
 import { SidebarUserMenuComponent } from "./sidebar-user-menu/sidebar-user-menu.component";
 import { TranslatePipe } from '@ngx-translate/core';
+import { StatsComponent } from "../stats/stats.component";
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -18,7 +19,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     TranslatePipe,
     PopoverModule,
     AvatarModule,
-    SidebarUserMenuComponent
+    SidebarUserMenuComponent,
+    StatsComponent
 ],
   templateUrl: './chat-sidebar.component.html',
   styleUrl: './chat-sidebar.component.scss',

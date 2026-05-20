@@ -70,7 +70,13 @@
     "no_users_found": "No users found",
     "language": "Language",
     "lang_en": "English",
-    "lang_hu": "Hungarian"
+    "lang_hu": "Hungarian",
+    "usage_stats": "Your Usage Statistics",
+    "stats_messages_sent": "Messages Sent:",
+    "stats_rooms_opened": "Rooms Opened:",
+    "stats_favorite_person": "Favorite Person:",
+    "none_yet": "None yet!",
+    "loading_stats": "Loading statistics..."
   },
   "validation": {
     "email": {
