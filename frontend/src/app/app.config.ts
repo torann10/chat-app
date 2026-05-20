@@ -1,5 +1,5 @@
 import { provideHttpClient, withInterceptors} from '@angular/common/http';
-import { ApplicationConfig, inject, isDevMode, provideAppInitializer, provideBrowserGlobalErrorListeners,  } from '@angular/core';
+import { ApplicationConfig, inject, isDevMode, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideTranslateService, TranslateService } from "@ngx-translate/core";
 import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 import { provideRouter } from '@angular/router';
@@ -27,7 +27,17 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAppInitializer(() => {
       const  translate = inject(TranslateService);
-      translate.use(translate.getBrowserLang() || "en");
+      const isBrowser = typeof window !== 'undefined';
+      let langToUse = 'en';
+
+      if (isBrowser) {
+        const savedLang = localStorage.getItem('preferredLang');
+        const browserLang = translate.getBrowserLang();
+
+        langToUse = savedLang || browserLang || 'en';
+      }
+
+      translate.use(langToUse);
     }),
     providePrimeNG({
       theme: {
