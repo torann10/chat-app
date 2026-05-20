@@ -1,19 +1,23 @@
-import { inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Pipe({
   name: 'timeAgo',
+  pure: false,
 })
 export class TimeAgoPipe implements PipeTransform {
-  private locale = inject(LOCALE_ID);
+  private translate = inject(TranslateService);
 
   transform(value: string | Date |number): string {
     if (!value) return '';
+
+    const currentLang = this.translate.currentLang || this.translate.getDefaultLang() || 'en';
 
     const date = new Date(value);
     const now = new Date();
     const elapsed = date.getTime() - now.getTime();
 
-    const rtf = new Intl.RelativeTimeFormat(this.locale, { numeric: 'auto' });
+    const rtf = new Intl.RelativeTimeFormat(currentLang, { numeric: 'auto' });
 
     const isCurrentYear = date.getFullYear() === now.getFullYear();
 
@@ -28,7 +32,7 @@ export class TimeAgoPipe implements PipeTransform {
       dateOptions.year = 'numeric';
     }
 
-    const dtf = new Intl.DateTimeFormat(this.locale, dateOptions);
+    const dtf = new Intl.DateTimeFormat(currentLang, dateOptions);
 
     const seconds = Math.round(elapsed / 1000);
     const minutes = Math.round(seconds / 60);

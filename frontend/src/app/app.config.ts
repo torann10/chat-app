@@ -27,15 +27,10 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAppInitializer(() => {
       const  translate = inject(TranslateService);
-      const isBrowser = typeof window !== 'undefined';
-      let langToUse = 'en';
 
-      if (isBrowser) {
-        const savedLang = localStorage.getItem('preferredLang');
-        const browserLang = translate.getBrowserLang();
-
-        langToUse = savedLang || browserLang || 'en';
-      }
+      const savedLang = localStorage.getItem('preferredLang');
+      const browserLang = translate.getBrowserLang();
+      const langToUse = savedLang || browserLang || 'en';
 
       translate.use(langToUse);
     }),

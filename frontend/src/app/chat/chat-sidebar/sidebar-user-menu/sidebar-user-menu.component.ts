@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { AvatarModule } from "primeng/avatar";
 import { ButtonModule } from "primeng/button";
 import { MenuModule } from "primeng/menu";
@@ -27,18 +27,8 @@ export class SidebarUserMenuComponent {
   protected readonly theme = inject(ThemeService);
 
   protected readonly currentUserName = this.authService.currentUser()?.email;
-  protected readonly currentLang = signal(
-    (typeof window !== 'undefined' ? localStorage.getItem('preferredLang') : null) 
-    ?? this.translate.getBrowserLang() 
-    ?? 'en'
-  );
+  protected readonly currentLang = signal(localStorage.getItem('preferredLang') ?? this.translate.getBrowserLang() ?? 'en');
   protected readonly langChangeSignal = toSignal(this.translate.onLangChange);
-
-  constructor() {
-    const savedLang = localStorage.getItem('preferredLang') ?? 'en';
-    this.translate.setFallbackLang('en');
-    this.translate.use(savedLang);
-  }
 
   protected readonly menuItems = computed<MenuItem[]>(() => {
     this.langChangeSignal();
@@ -80,9 +70,7 @@ export class SidebarUserMenuComponent {
   protected changeLanguage(lang: string): void {
     this.translate.use(lang).subscribe(() => {
       this.currentLang.set(lang);
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('preferredLang', lang);
-      }
+      localStorage.setItem('preferredLang', lang);
     });
   }
 }
