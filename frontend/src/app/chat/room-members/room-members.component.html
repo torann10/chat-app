@@ -82,9 +82,10 @@
 
             <div class="info">
               <div class="name-group">
-                <span class="name">
+                <span class="name" [pTooltip]="member.user.fullname || member.user.email" tooltipPosition="top">
                   {{ member.user.fullname || member.user.email }}
                 </span>
+                <span class="status-indicator" [class.status-indicator-online]="member.user.isOnline"></span>
                 @if (member.user.id === currentUserId()) {
                   <span class="you-badge">{{ 'app.you' | translate }}</span>
                 }

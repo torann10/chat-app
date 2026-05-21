@@ -12,20 +12,26 @@
       @if (r.type !== 'dm') {
         <span class="room-prefix">#</span>
         <h2 class="title">{{ r.name }}</h2>
+
+        @if (activeUsersCount() > 0) {
+          <div class="status">
+            <div class="status-indicator status-indicator-online"></div>
+            <span class="status-text">{{ 'app.members_online' | translate: {count: activeUsersCount()} }} </span>
+          </div>
+        }
       } @else {
         <p-avatar label="{{r.name.charAt(0).toUpperCase()}}" shape="circle" />
         <h2 class="title">{{ r.name }}</h2>
+        
+        <div class="status">
+          <div class="status-indicator" [class.status-indicator-online]="r.otherUser?.isOnline"></div>
+          <span class="status-text">{{ (r.otherUser?.isOnline ? 'app.online' : 'app.offline') | translate }}</span>
+        </div>
       }
     } @else {
       <h2 class="placeholder">{{ 'app.select_room' | translate }}</h2>
     }
 
-    @if (activeUsersCount() > 0) {
-      <div class="online-status">
-        <div class="status-indicator"></div>
-        <span class="status-text">{{ 'app.members_online' | translate: {count: activeUsersCount()} }} </span>
-      </div>
-    }
   </div>
 
   <div class="actions">
