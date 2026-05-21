@@ -6,6 +6,8 @@ import { AuthService } from '../auth/auth.service';
 import { tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as StatsActions from './store/stats.actions';
+import * as ChatActions from './store/chat.actions';
+import { selectActiveRoomId, selectDirectMessages, selectIsLoadingRooms, selectRooms } from './store/chat.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +18,11 @@ export class ChatService {
   private authService = inject(AuthService);
   private store = inject(Store);
 
-  readonly channels = signal<Room[]>([]);
-  readonly directMessages = signal<Room[]>([]);
-  readonly isLoadingRooms = signal(false);
+  readonly channels = this.store.selectSignal(selectRooms);
+  readonly directMessages = this.store.selectSignal(selectDirectMessages);
+  readonly isLoadingRooms = this.store.selectSignal(selectIsLoadingRooms);
+  readonly activeRoomId = this.store.selectSignal(selectActiveRoomId);
 
-  readonly activeRoomId = signal<number | null>(null);
   readonly messages = signal<Message[]>([]);
   readonly isLoadingMessages = signal(false);
   readonly isLoadingOlderMessages = signal(false);
@@ -54,20 +56,7 @@ export class ChatService {
       if (data.roomId === this.activeRoomId()) {
         this.messages.update((msgs) => [...msgs, data]);
       } else {
-        this.channels.update((rooms) =>
-          rooms.map((r) =>
-            r.id === data.roomId && r.membership
-              ? { ...r, unreadCount: (r.unreadCount ?? 0) + 1 }
-              : r
-          )
-        );
-        this.directMessages.update((dms) =>
-          dms.map((dm) =>
-            dm.id === data.roomId
-              ? { ...dm, unreadCount: (dm.unreadCount ?? 0) + 1 }
-              : dm
-          )
-        );
+        this.store.dispatch(ChatActions.incrementUnread({ roomId: data.roomId }));
       }
     });
 
@@ -76,13 +65,7 @@ export class ChatService {
     });
 
     this.socketService.onUserStatusChange(({ userId, isOnline }) => {
-      this.directMessages.update((dms) =>
-        dms.map((dm) =>
-          dm.otherUser?.id === userId
-            ? { ...dm, otherUser: { ...dm.otherUser!, isOnline } }
-            : dm
-        )
-      );
+      this.store.dispatch(ChatActions.updateUserStatus({ userId, isOnline }));
 
       this.roomMembers.update((members) => 
         members.map((member) => 
@@ -99,10 +82,9 @@ export class ChatService {
         this.socketService.reconnect();
         this.loadRooms();
       } else {
-        this.channels.set([]);
-        this.directMessages.set([]);
+        this.store.dispatch(ChatActions.clearChatState());
+
         this.messages.set([]);
-        this.activeRoomId.set(null);
         this.nextCursor.set(null);
         this.socketService.disconnect();
       }
@@ -117,41 +99,20 @@ export class ChatService {
     });
   }
 
-  private loadRooms(): void {
-    this.isLoadingRooms.set(true);
-
-    this.apiService.getRooms('room').subscribe({
-      next: (rooms) => {
-        this.channels.set(rooms);
-        if (rooms.length > 0 && this.activeRoomId() === null) {
-          this.activeRoomId.set(rooms[0].id);
-        }
-      },
-      error: (err) => console.error('[Chat] Failed to load rooms:', err),
-    });
-
-    this.apiService.getRooms('dm').subscribe({
-      next: (dms) => {
-        this.directMessages.set(dms);
-        this.isLoadingRooms.set(false);
-      },
-      error: (err) => {
-        console.error('[Chat] Failed to load DMs:', err);
-        this.isLoadingRooms.set(false);
-      },
-    });
+  loadRooms(): void {
+    this.store.dispatch(ChatActions.loadRooms());
   }
 
   selectRoom(roomId: number): void {
     this.store.dispatch(StatsActions.incrementRoomsOpened());
-    this.activeRoomId.set(roomId);
+    this.store.dispatch(ChatActions.switchRoom({ roomId }));
   }
 
   createRoom(body: CreateRoomBody) {
     return this.apiService.createRoom(body).pipe(
       tap((room) => {
-        this.channels.update((rooms) => [...rooms, room]);
-        this.activeRoomId.set(room.id);
+        this.store.dispatch(ChatActions.addRoom({ room }));
+        this.store.dispatch(ChatActions.switchRoom({ roomId: room.id }));
       })
     );
   }
@@ -159,12 +120,10 @@ export class ChatService {
   leaveRoom(roomId: number) {
     return this.apiService.removeMember(roomId, this.currentUserId()).pipe(
       tap(() => {
-        this.channels.update((rooms) =>
-          rooms.map((r) => (r.id === roomId ? { ...r, membership: null } : r))
-        );
+        this.store.dispatch(ChatActions.removeRoomMembership({ roomId }));
         if (this.activeRoomId() === roomId) {
           const next = this.channels().find((r) => r.id !== roomId && !!r.membership);
-          this.activeRoomId.set(next?.id ?? null);
+          this.store.dispatch(ChatActions.switchRoom({ roomId: next?.id ?? null as any }));
         }
       })
     );
@@ -173,13 +132,10 @@ export class ChatService {
   joinRoom(roomId: number, password?: string) {
     return this.apiService.joinRoom(roomId, password).pipe(
       tap((member) => {
-        this.channels.update((rooms) =>
-          rooms.map((r) =>
-            r.id === roomId
-              ? { ...r, membership: { role: member.role, joinedAt: member.joinedAt } }
-              : r
-          )
-        );
+        this.store.dispatch(ChatActions.updateRoomMembership({ 
+          roomId, 
+          membership: { role: member.role, joinedAt: member.joinedAt } 
+        }));
       })
     );
   }
@@ -187,27 +143,15 @@ export class ChatService {
   createDm(user: User) {
     return this.apiService.createRoom({ type: 'dm', userId: user.id }).pipe(
       tap((room) => {
-        const existing = this.directMessages().find((d) => d.id === room.id);
-        if (!existing) {
-          const dmEntry: Room = {
-            ...room,
-            name: user.fullname ?? user.email,
-            otherUser: user,
-          };
-          this.directMessages.update((dms) => [dmEntry, ...dms]);
-        }
-        this.activeRoomId.set(room.id);
+        const dmEntry: Room = { ...room, name: user.fullname ?? user.email, otherUser: user };
+        this.store.dispatch(ChatActions.addDm({ dm: dmEntry }));
+        this.store.dispatch(ChatActions.switchRoom({ roomId: room.id }));
       })
     );
   }
 
   private clearUnread(roomId: number): void {
-    this.channels.update((rooms) =>
-      rooms.map((r) => (r.id === roomId ? { ...r, unreadCount: 0 } : r))
-    );
-    this.directMessages.update((dms) =>
-      dms.map((dm) => (dm.id === roomId ? { ...dm, unreadCount: 0 } : dm))
-    );
+    this.store.dispatch(ChatActions.clearUnread({ roomId }));
   }
 
   sendMessage(content: string): void {

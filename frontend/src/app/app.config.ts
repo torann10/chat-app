@@ -13,6 +13,8 @@ import { statsReducer } from './chat/store/stats.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { StatsEffects } from './chat/store/stats.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { ChatEffects } from './chat/store/chat.effects';
+import { chatReducer } from './chat/store/chat.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -49,7 +51,8 @@ export const appConfig: ApplicationConfig = {
     }),
     provideStore(),
     provideState({ name: 'stats', reducer: statsReducer }),
-    provideEffects([StatsEffects]),
+    provideState({ name: 'chat', reducer: chatReducer }),
+    provideEffects([StatsEffects, ChatEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

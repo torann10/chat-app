@@ -9,6 +9,8 @@ import { CreateDmDialogComponent } from "../create-dm-dialog/create-dm-dialog.co
 import { JoinRoomDialogComponent } from "../join-room-dialog/join-room-dialog.component";
 import { RoomMembersComponent } from "../room-members/room-members.component";
 import { CreateRoomBody, Room, User } from 'shared';
+import { Store } from '@ngrx/store';
+import { selectDirectMessages, selectRooms } from '../store/chat.selectors';
 
 @Component({
   selector: 'app-chat-layout',
@@ -35,9 +37,11 @@ export class ChatLayoutComponent {
   protected readonly showMembers = signal(false);
 
   private chatService = inject(ChatService);
+  private store = inject(Store);
 
-  protected readonly channels = this.chatService.channels;
-  protected readonly directMessages = this.chatService.directMessages;
+  protected readonly channels = this.store.selectSignal(selectRooms);
+  protected readonly directMessages = this.store.selectSignal(selectDirectMessages);
+  
   protected readonly activeRoom = this.chatService.activeRoom;
   protected readonly messages = this.chatService.messages;
   protected readonly isLoading = this.chatService.isLoadingMessages;
@@ -62,7 +66,8 @@ export class ChatLayoutComponent {
   }
 
   protected selectRoom(roomId: number): void {
-    const room = this.chatService.channels().find((r) => r.id === roomId);
+    const room = this.channels().find((r) => r.id === roomId);
+
     if (room && !room.membership) {
       this.pendingJoinRoom.set(room);
       this.showJoinRoom.set(true);
