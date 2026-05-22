@@ -1,6 +1,9 @@
 <div class="user-profile">
   <div class="avatar-wrapper">
-    <p-avatar label="Y" shape="circle" />
+    <p-avatar
+      [label]="initials(currentUser)"
+      shape="circle"
+      class="avatar avatar-text-sm" />
   </div>
 
   <div class="info">

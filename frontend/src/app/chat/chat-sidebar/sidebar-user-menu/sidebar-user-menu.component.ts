@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ViewEncapsulation } from '@angular/core';
 import { AvatarModule } from "primeng/avatar";
 import { ButtonModule } from "primeng/button";
 import { MenuModule } from "primeng/menu";
@@ -20,13 +20,15 @@ import { toSignal } from '@angular/core/rxjs-interop';
   ],
   templateUrl: './sidebar-user-menu.component.html',
   styleUrl: './sidebar-user-menu.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarUserMenuComponent {
   private authService = inject(AuthService);
   private translate = inject(TranslateService);
   protected readonly theme = inject(ThemeService);
 
-  protected readonly currentUserName = this.authService.currentUser()?.email;
+  protected readonly currentUser = {fullname: this.authService.currentUser()?.fullname || null, email: this.authService.currentUser()!.email};
+  protected readonly currentUserName = this.authService.currentUser()?.fullname;
   protected readonly currentLang = signal(localStorage.getItem('preferredLang') ?? this.translate.getBrowserLang() ?? 'en');
   protected readonly langChangeSignal = toSignal(this.translate.onLangChange);
 
@@ -72,5 +74,18 @@ export class SidebarUserMenuComponent {
       this.currentLang.set(lang);
       localStorage.setItem('preferredLang', lang);
     });
+  }
+
+  initials(user: { fullname: string | null; email: string }): string {
+    if (user.fullname) {
+      return user.fullname
+        .trim()
+        .split(/\s+/)
+        .map((n) => n[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase();
+    }
+    return user.email.slice(0, 2).toUpperCase();
   }
 }

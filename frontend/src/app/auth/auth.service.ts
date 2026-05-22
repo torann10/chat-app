@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 export interface CurrentUser {
   id: number;
   email: string;
+  fullname: string;
 }
 
 @Injectable({
@@ -59,10 +61,9 @@ export class AuthService {
     const token = this.getToken();
     if (!token) return null;
     try {
-      const payload = JSON.parse(
-        atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))
-      );
-      return { id: payload.id, email: payload.email };
+      const payload: any = jwtDecode(token);
+
+      return { id: payload.id, email: payload.email, fullname: payload.fullname };
     } catch {
       return null;
     }

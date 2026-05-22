@@ -8,6 +8,17 @@
   .avatar-wrapper {
     position: relative;
     flex-shrink: 0;
+
+    .avatar {
+    flex-shrink: 0;
+
+    &-text-sm {
+      .p-avatar-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+  }
   }
 
   .info {
