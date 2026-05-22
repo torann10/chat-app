@@ -1,4 +1,4 @@
-import { Component, inject, model, output, ViewEncapsulation } from '@angular/core';
+import { Component, inject, model, OnInit, output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateRoomBody } from 'shared';
 import { PasswordModule } from 'primeng/password';
@@ -23,7 +23,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   styleUrl: './create-room-dialog.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class CreateRoomDialogComponent {
+export class CreateRoomDialogComponent implements OnInit {
   visible = model(false);
 
   submitted = output<CreateRoomBody>();
@@ -42,7 +42,7 @@ export class CreateRoomDialogComponent {
   form = this.fb.nonNullable.group({
     type: ['public' as 'public' | 'private' | 'password'],
     name: ['', [Validators.required, Validators.maxLength(100)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.minLength(6)]],
   });
 
   get selectedType() {
@@ -72,5 +72,24 @@ export class CreateRoomDialogComponent {
   close(): void {
     this.visible.set(false);
     this.form.reset({ type: 'public', name: '', password: '' });
+  }
+
+  setupConditionalValidation(): void {
+    this.form.controls.type.valueChanges.subscribe((selectedType) => {
+      const passwordControl = this.form.controls.password;
+
+      if (selectedType === 'password') {
+        passwordControl.addValidators(Validators.required);
+      } else {
+        passwordControl.removeValidators(Validators.required);
+        passwordControl.reset(''); 
+      }
+
+      passwordControl.updateValueAndValidity();
+    });
+  }
+
+  ngOnInit(): void {
+    this.setupConditionalValidation();
   }
 }
