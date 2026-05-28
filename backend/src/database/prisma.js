@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const defaultDbUrl = pathToFileURL(join(__dirname, '../../chat.db')).href;
+const defaultDbUrl = pathToFileURL(join(__dirname, '../../prisma/chat.db')).href;
 
 const adapter = new PrismaLibSql({ url: process.env.DATABASE_URL || defaultDbUrl });
 

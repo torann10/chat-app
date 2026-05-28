@@ -13,6 +13,17 @@ dist
 frontend/dist
 shared/dist
 
+# Local SQLite Database files
+*.db
+*.db-journal
+backend/prisma/*.db
+backend/prisma/*.db-journal
+
+# Secrets
+.env
+.env.local
+backend/.env.local
+
 # Logs and debug files
 npm-debug.log
 npm-debug.log.*
